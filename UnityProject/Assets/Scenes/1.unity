@@ -2872,6 +2872,7 @@ GameObject:
   - 54: {fileID: 1990117663}
   - 114: {fileID: 1990117662}
   - 114: {fileID: 1990117665}
+  - 114: {fileID: 1990117666}
   m_Layer: 0
   m_Name: PlayerPlaceholder
   m_TagString: Untagged
@@ -2970,6 +2971,17 @@ MonoBehaviour:
   canJump: 1
   jumpHeight: 2.5
   isMoving: 0
+--- !u!114 &1990117666
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1990117659}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 68dac4e6e06db2a498606c495a25fe1b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &2009525952
 GameObject:
   m_ObjectHideFlags: 0
