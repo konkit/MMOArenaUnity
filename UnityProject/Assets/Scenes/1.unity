@@ -2873,6 +2873,7 @@ GameObject:
   - 114: {fileID: 1990117662}
   - 114: {fileID: 1990117665}
   - 114: {fileID: 1990117666}
+  - 95: {fileID: 1990117667}
   m_Layer: 0
   m_Name: PlayerPlaceholder
   m_TagString: Untagged
@@ -2917,9 +2918,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 28ff7e1743a275347a67124f3769a1eb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mAnimation: {fileID: 385864160}
-  idleAnimation: {fileID: 7400002, guid: 0d6446b00d81a9641a2eca08eb97949f, type: 3}
-  walkAnimation: {fileID: 7400004, guid: 0d6446b00d81a9641a2eca08eb97949f, type: 3}
 --- !u!54 &1990117663
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -2949,7 +2947,7 @@ MonoBehaviour:
   mouseSensX: 2
   mouseSensY: 1
   mainCamera: {fileID: 0}
-  cameraLocalPos: {x: .860000014, y: 2, z: -1.79999995}
+  cameraLocalPos: {x: .860000014, y: 2, z: -2.4000001}
   cntCameraYaw: 0
   cntCameraPitch: 0
   crosshairTexture: {fileID: 2800000, guid: a0623c3fd811e5043928c620d94c7d5c, type: 3}
@@ -2982,6 +2980,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 68dac4e6e06db2a498606c495a25fe1b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!95 &1990117667
+Animator:
+  serializedVersion: 2
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1990117659}
+  m_Enabled: 1
+  m_Avatar: {fileID: 9000000, guid: 0d6446b00d81a9641a2eca08eb97949f, type: 3}
+  m_Controller: {fileID: 9100000, guid: 15e07612e46f0cb41a82f8e7315baf36, type: 2}
+  m_CullingMode: 0
+  m_ApplyRootMotion: 1
+  m_AnimatePhysics: 0
+  m_HasTransformHierarchy: 1
 --- !u!1 &2009525952
 GameObject:
   m_ObjectHideFlags: 0

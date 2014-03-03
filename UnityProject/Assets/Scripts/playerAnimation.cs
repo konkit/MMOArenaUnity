@@ -3,46 +3,22 @@ using System.Collections;
 
 public class playerAnimation : MonoBehaviour {
 	
-	//main animation object
-	public Animation mAnimation;
-	
-	//animation clips - already sliced, ready to play
-	public AnimationClip idleAnimation;
-	public AnimationClip walkAnimation;
-	
-	//Player state
-	private enum State { Idle, Walking};
-	private State mState;
-	
-	void Awake() {	
-		mState = State.Idle;
-	}
-	
-	// Use this for initialization
-	void Start () {
-	
-	}
-	
-	// Update is called once per frame
-	void Update () {
+	Animator animator;
 
-		if(Input.GetAxis ("Vertical") != 0.0 )
+	int punchHash = Animator.StringToHash("Base Layer.punch");
+
+	void Start() {
+		animator = GetComponent<Animator>();
+	}
+
+	void Update() {
+		float move = Input.GetAxis("Vertical");
+		animator.SetFloat("speed", move);
+
+		AnimatorStateInfo stateInfo = animator.GetCurrentAnimatorStateInfo(0);
+		if( stateInfo.nameHash != punchHash && Input.GetKeyDown(KeyCode.Space) )
 		{
-			mState = State.Walking;	
+			animator.SetTrigger("punchTr");
 		}
-		else
-		{
-			mState = State.Idle;	
-		}		
-		
-		if(mState == State.Walking)
-		{
-			mAnimation.CrossFade(walkAnimation.name);
-		}
-		
-		if(mState == State.Idle)
-		{
-			mAnimation.CrossFade(idleAnimation.name);
-		}			
 	}
 }
