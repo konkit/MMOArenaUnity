@@ -9,7 +9,7 @@ public class PlayerMovementRigidbodyController : MonoBehaviour {
 	public float forwardSpeed = 5.0f;
 	public float sideSpeed = 3.0f; 
 		
-	public float gravity = 10.0f;
+	public float gravity = 5.0f;
 	public float maxVelocityChange = 5.0f;
 	
 	public bool canJump = true;
@@ -50,7 +50,7 @@ public class PlayerMovementRigidbodyController : MonoBehaviour {
 			
 	        // Jump
 	        if (canJump && Input.GetButton("Jump")) {
-	            rigidbody.velocity = new Vector3(velocity.x, CalculateJumpVerticalSpeed(), velocity.z);
+	            rigidbody.velocity = new Vector3(velocity.x, /*velocity.y*/CalculateJumpVerticalSpeed(), velocity.z);
 	        }
 	    }
  

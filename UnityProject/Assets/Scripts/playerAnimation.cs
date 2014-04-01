@@ -16,8 +16,9 @@ public class playerAnimation : MonoBehaviour {
 		animator.SetFloat("speed", move);
 
 		AnimatorStateInfo stateInfo = animator.GetCurrentAnimatorStateInfo(0);
-		if( stateInfo.nameHash != punchHash && Input.GetKeyDown(KeyCode.Space) )
+		if( stateInfo.nameHash != punchHash && Input.GetMouseButtonDown(0) )
 		{
+            Debug.Log(stateInfo.nameHash);
 			animator.SetTrigger("punchTr");
 		}
 	}
