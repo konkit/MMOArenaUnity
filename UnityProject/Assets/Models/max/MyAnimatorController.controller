@@ -20,6 +20,12 @@ AnimatorController:
     m_DefaultInt: 0
     m_DefaultBool: 0
     m_Controller: {fileID: 9100000}
+  - m_Name: punch
+    m_Type: 9
+    m_DefaultFloat: 0
+    m_DefaultInt: 0
+    m_DefaultBool: 0
+    m_Controller: {fileID: 9100000}
   m_AnimatorLayers:
   - serializedVersion: 3
     m_Name: Base Layer
@@ -32,6 +38,33 @@ AnimatorController:
     m_IKPass: 0
     m_SyncedLayerAffectsTiming: 0
     m_Controller: {fileID: 9100000}
+--- !u!206 &20600000
+BlendTree:
+  m_ObjectHideFlags: 3
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_Name: Blend Tree
+  m_Childs:
+  - m_Motion: {fileID: 7400004, guid: 0d6446b00d81a9641a2eca08eb97949f, type: 3}
+    m_Threshold: 0
+    m_Position: {x: 0, y: 0}
+    m_TimeScale: 1
+    m_CycleOffset: 0
+    m_IsAnim: 1
+    m_Mirror: 0
+  - m_Motion: {fileID: 7400006, guid: 0d6446b00d81a9641a2eca08eb97949f, type: 3}
+    m_Threshold: 1
+    m_Position: {x: 0, y: 0}
+    m_TimeScale: 1
+    m_CycleOffset: 0
+    m_IsAnim: 1
+    m_Mirror: 0
+  m_BlendParameter: speed
+  m_BlendParameterY: speed
+  m_MinThreshold: 0
+  m_MaxThreshold: 1
+  m_UseAutomaticThresholds: 1
+  m_BlendType: 0
 --- !u!1101 &110100000
 Transition:
   m_ObjectHideFlags: 3
@@ -39,13 +72,13 @@ Transition:
   m_PrefabInternal: {fileID: 0}
   m_Name: 
   m_SrcState: {fileID: 110200000}
-  m_DstState: {fileID: 110260773}
+  m_DstState: {fileID: 110239737}
   m_TransitionDuration: .127118647
   m_TransitionOffset: 0
   m_Conditions:
   - m_ConditionMode: 3
     m_ConditionEvent: speed
-    m_EventTreshold: .00999999978
+    m_EventTreshold: 9.99999975e-06
     m_ExitTime: .872881353
   m_Atomic: 1
   m_Solo: 0
@@ -68,39 +101,111 @@ Transition:
   m_Atomic: 1
   m_Solo: 0
   m_Mute: 0
---- !u!1101 &110164016
+--- !u!1101 &110123090
 Transition:
   m_ObjectHideFlags: 3
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_Name: 
-  m_SrcState: {fileID: 110260773}
+  m_SrcState: {fileID: 110217218}
+  m_DstState: {fileID: 110239737}
+  m_TransitionDuration: .249999881
+  m_TransitionOffset: 0
+  m_Conditions:
+  - m_ConditionMode: 5
+    m_ConditionEvent: jumpTr
+    m_EventTreshold: 0
+    m_ExitTime: .75
+  m_Atomic: 1
+  m_Solo: 0
+  m_Mute: 0
+--- !u!1101 &110139322
+Transition:
+  m_ObjectHideFlags: 3
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_Name: 
+  m_SrcState: {fileID: 110239737}
   m_DstState: {fileID: 110257250}
-  m_TransitionDuration: .285904169
-  m_TransitionOffset: .285106301
+  m_TransitionDuration: .273623735
+  m_TransitionOffset: .296899617
   m_Conditions:
   - m_ConditionMode: 1
     m_ConditionEvent: jumpTr
     m_EventTreshold: 0
-    m_ExitTime: .68750006
+    m_ExitTime: .722222328
   m_Atomic: 1
   m_Solo: 0
   m_Mute: 0
---- !u!1101 &110167489
+--- !u!1101 &110139389
 Transition:
   m_ObjectHideFlags: 3
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_Name: 
   m_SrcState: {fileID: 110257250}
-  m_DstState: {fileID: 110260773}
+  m_DstState: {fileID: 110239737}
   m_TransitionDuration: .149999976
   m_TransitionOffset: 0
   m_Conditions:
-  - m_ConditionMode: 5
-    m_ConditionEvent: speed
+  - m_ConditionMode: 2
+    m_ConditionEvent: jumpTr
     m_EventTreshold: 0
     m_ExitTime: .850000024
+  m_Atomic: 1
+  m_Solo: 0
+  m_Mute: 0
+--- !u!1101 &110148361
+Transition:
+  m_ObjectHideFlags: 3
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_Name: 
+  m_SrcState: {fileID: 110239737}
+  m_DstState: {fileID: 110200000}
+  m_TransitionDuration: .277777702
+  m_TransitionOffset: 0
+  m_Conditions:
+  - m_ConditionMode: 4
+    m_ConditionEvent: speed
+    m_EventTreshold: .00100000005
+    m_ExitTime: .722222328
+  m_Atomic: 1
+  m_Solo: 0
+  m_Mute: 0
+--- !u!1101 &110166425
+Transition:
+  m_ObjectHideFlags: 3
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_Name: 
+  m_SrcState: {fileID: 110200000}
+  m_DstState: {fileID: 110217218}
+  m_TransitionDuration: .127118647
+  m_TransitionOffset: 0
+  m_Conditions:
+  - m_ConditionMode: 1
+    m_ConditionEvent: punch
+    m_EventTreshold: 0
+    m_ExitTime: .872881353
+  m_Atomic: 1
+  m_Solo: 0
+  m_Mute: 0
+--- !u!1101 &110168555
+Transition:
+  m_ObjectHideFlags: 3
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_Name: 
+  m_SrcState: {fileID: 110239737}
+  m_DstState: {fileID: 110217218}
+  m_TransitionDuration: .277777702
+  m_TransitionOffset: 0
+  m_Conditions:
+  - m_ConditionMode: 1
+    m_ConditionEvent: punch
+    m_EventTreshold: 0
+    m_ExitTime: .722222328
   m_Atomic: 1
   m_Solo: 0
   m_Mute: 0
@@ -122,21 +227,21 @@ Transition:
   m_Atomic: 1
   m_Solo: 0
   m_Mute: 0
---- !u!1101 &110175115
+--- !u!1101 &110193356
 Transition:
   m_ObjectHideFlags: 3
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_Name: 
-  m_SrcState: {fileID: 110260773}
+  m_SrcState: {fileID: 110217218}
   m_DstState: {fileID: 110200000}
-  m_TransitionDuration: .31249994
+  m_TransitionDuration: .249999881
   m_TransitionOffset: 0
   m_Conditions:
-  - m_ConditionMode: 4
-    m_ConditionEvent: speed
-    m_EventTreshold: .00999999978
-    m_ExitTime: .68750006
+  - m_ConditionMode: 5
+    m_ConditionEvent: jumpTr
+    m_EventTreshold: 0
+    m_ExitTime: .750000119
   m_Atomic: 1
   m_Solo: 0
   m_Mute: 0
@@ -155,6 +260,36 @@ State:
   m_IKOnFeet: 0
   m_Mirror: 0
   m_Tag: 
+--- !u!1102 &110217218
+State:
+  m_ObjectHideFlags: 3
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_Name: punch
+  m_Speed: 1
+  m_CycleOffset: 0
+  m_Motions:
+  - {fileID: 7400012, guid: 0d6446b00d81a9641a2eca08eb97949f, type: 3}
+  m_ParentStateMachine: {fileID: 110700000}
+  m_Position: {x: 60, y: 120, z: 0}
+  m_IKOnFeet: 0
+  m_Mirror: 0
+  m_Tag: 
+--- !u!1102 &110239737
+State:
+  m_ObjectHideFlags: 3
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_Name: Groud
+  m_Speed: 1
+  m_CycleOffset: 0
+  m_Motions:
+  - {fileID: 20600000}
+  m_ParentStateMachine: {fileID: 110700000}
+  m_Position: {x: 396, y: 120, z: 0}
+  m_IKOnFeet: 1
+  m_Mirror: 0
+  m_Tag: 
 --- !u!1102 &110257250
 State:
   m_ObjectHideFlags: 3
@@ -166,22 +301,7 @@ State:
   m_Motions:
   - {fileID: 7400008, guid: 0d6446b00d81a9641a2eca08eb97949f, type: 3}
   m_ParentStateMachine: {fileID: 110700000}
-  m_Position: {x: 372, y: -96, z: 0}
-  m_IKOnFeet: 1
-  m_Mirror: 0
-  m_Tag: 
---- !u!1102 &110260773
-State:
-  m_ObjectHideFlags: 3
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_Name: run
-  m_Speed: 1
-  m_CycleOffset: 0
-  m_Motions:
-  - {fileID: 7400006, guid: 0d6446b00d81a9641a2eca08eb97949f, type: 3}
-  m_ParentStateMachine: {fileID: 110700000}
-  m_Position: {x: 384, y: 120, z: 0}
+  m_Position: {x: 540, y: 0, z: 0}
   m_IKOnFeet: 1
   m_Mirror: 0
   m_Tag: 
@@ -195,26 +315,37 @@ StateMachine:
   m_DefaultState: {fileID: 110200000}
   m_States:
   - {fileID: 110200000}
-  - {fileID: 110260773}
   - {fileID: 110257250}
+  - {fileID: 110217218}
+  - {fileID: 110239737}
   m_ChildStateMachine: []
   m_ChildStateMachinePosition: []
   m_OrderedTransitions:
     data:
-      first: {fileID: 110257250}
+      first: {fileID: 110239737}
       second:
-      - {fileID: 110172846}
-      - {fileID: 110167489}
+      - {fileID: 110148361}
+      - {fileID: 110139322}
+      - {fileID: 110168555}
     data:
-      first: {fileID: 110260773}
+      first: {fileID: 110217218}
       second:
-      - {fileID: 110175115}
-      - {fileID: 110164016}
+      - {fileID: 110193356}
+      - {fileID: 110123090}
     data:
       first: {fileID: 110200000}
       second:
-      - {fileID: 110100000}
       - {fileID: 110114083}
+      - {fileID: 110166425}
+      - {fileID: 110100000}
+    data:
+      first: {fileID: 0}
+      second: []
+    data:
+      first: {fileID: 110257250}
+      second:
+      - {fileID: 110172846}
+      - {fileID: 110139389}
   m_MotionSetCount: 1
   m_AnyStatePosition: {x: 50, y: 20, z: 0}
   m_ParentStateMachinePosition: {x: 800, y: 20, z: 0}
