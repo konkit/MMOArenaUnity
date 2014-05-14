@@ -4,13 +4,15 @@ using SimpleJSON;
 
 public class RetreiveDataScript : MonoBehaviour {
 
-	public string serverAddress;
+	string serverAddress = "http://localhost:8080/GrailsMMOArenaBackend/fight/requestPlayerData";
 	public int playerID;
 		
 	// Data from backend
 	public string characterName;
 	public int characterLevel;
 	public int characterExp;
+
+	public string items;
 	
 	public Rect retreiveDataButtonRect;
 	
@@ -45,6 +47,6 @@ public class RetreiveDataScript : MonoBehaviour {
 		characterName = N["character"]["name"];
 		characterLevel = int.Parse (N["character"]["level"]);
 		characterExp = int.Parse( N["character"]["exp"] );
-
+		items = N["items"][0]["name"];
 	}
 }

@@ -16,6 +16,8 @@ public class MouseController : MonoBehaviour {
 	
 	Vector3 prevMousePos = Vector3.zero;
 	Vector3 prevPlrPos = Vector3.zero;
+
+	Quaternion yawQuaternion;
 	
 	void Awake() {
 		mainCamera = Camera.main;	
@@ -44,7 +46,7 @@ public class MouseController : MonoBehaviour {
 		cntCameraYaw += diffVec.x * mouseSensX;
 		cntCameraPitch += diffVec.y * mouseSensY;
 		
-		Quaternion yawQuaternion = Quaternion.AngleAxis(cntCameraYaw, new Vector3(0f, 1f, 0f) );
+		yawQuaternion = Quaternion.AngleAxis(cntCameraYaw, new Vector3(0f, 1f, 0f) );
 		Quaternion pitchQuaternion = Quaternion.AngleAxis(cntCameraPitch, new Vector3(1f, 0f, 0f) );		
 		mainCamera.transform.rotation = GetRotation();
 		
@@ -58,6 +60,11 @@ public class MouseController : MonoBehaviour {
 		prevMousePos = cntPos;
 		prevPlrPos = transform.position;	
 	}
+
+	public void AlignRotation() {
+		transform.localRotation = yawQuaternion;
+	}
+
 			
 	void OnGUI () {
 		Rect crosshairRect = new Rect( Screen.width/2 - crosshairTexture.width/2,

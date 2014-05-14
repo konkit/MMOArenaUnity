@@ -2,8 +2,9 @@
 using System.Collections;
 
 public class Spellcasting : MonoBehaviour {
+	public GameObject fireballPrefab;
 
-	public bool isSpellcasting = false;
+	public float spellHeight = 1.0f;
 
 	// Use this for initialization
 	void Start () {
@@ -12,11 +13,11 @@ public class Spellcasting : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		if( isSpellcasting ) {
+		if( Input.GetKey(KeyCode.Mouse0) ) {
+			GetComponent<MouseController>().AlignRotation();
 
-			if( Input.GetKey(KeyCode.Mouse0) ) {
-				Debug.Log("Attacking");
-			}
+			Debug.Log("Attacking");
+			Instantiate(fireballPrefab, (transform.position + new Vector3(0.0f, spellHeight, 0.0f)) + transform.forward, transform.rotation);
 		}	
 	}
 }
