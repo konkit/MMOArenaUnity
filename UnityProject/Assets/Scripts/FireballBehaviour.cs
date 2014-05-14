@@ -4,15 +4,13 @@ using System.Collections;
 public class FireballBehaviour : MonoBehaviour {
 
 	public float speed = 1.0f;
-	public float damage = 100.0f;
+	public int damage = 50;
 
 	public GameObject explosion;
 
-	public float timeToDestroy = 5.0f;
-
 	// Use this for initialization
 	void Start () {
-		Destroy (gameObject, timeToDestroy);
+
 	}
 	
 	// Update is called once per frame
@@ -24,9 +22,12 @@ public class FireballBehaviour : MonoBehaviour {
 
 	void OnCollisionEnter(Collision coll) {
 		GameObject collidedObj = coll.gameObject;
-		Debug.Log("Collided : " + collidedObj);
 
 		Instantiate(explosion, transform.position, transform.rotation);
+
+		if( coll.gameObject.tag == "Player" || coll.gameObject.tag == "Enemy" ) {
+			coll.gameObject.GetComponent<HealthOfPlayer>().decreaseHealth(damage);
+		}
 
 		Destroy(this.gameObject);
 	}
