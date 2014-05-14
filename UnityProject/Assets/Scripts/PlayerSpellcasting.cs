@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class Spellcasting : MonoBehaviour {
+public class PlayerSpellcasting : MonoBehaviour {
 	public GameObject fireballPrefab;
 
 	public float spellHeight = 1.4f;
