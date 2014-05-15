@@ -16,19 +16,19 @@ public class FireballBehaviour : MonoBehaviour {
 	// Update is called once per frame
 	void FixedUpdate () {
 		transform.Translate(Vector3.forward * speed);
-
+        Destroy(GameObject.Find("ShockFlame(Clone)"), 2f);
 
 	}
 
 	void OnCollisionEnter(Collision coll) {
 		GameObject collidedObj = coll.gameObject;
-
+        
 		Instantiate(explosion, transform.position, transform.rotation);
 
 		if( coll.gameObject.tag == "Player" || coll.gameObject.tag == "Enemy" ) {
 			coll.gameObject.GetComponent<HealthOfPlayer>().decreaseHealth(damage);
 		}
-
-		Destroy(this.gameObject);
+        
+		Destroy(gameObject);
 	}
 }

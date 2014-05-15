@@ -7,13 +7,14 @@ public class DestroyAfterTime : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-		if( timeToDestroy != 0.0f ) {
-			Destroy (this, timeToDestroy);
-		}
+		
 	}
 	
 	// Update is called once per frame
 	void Update () {
-	
+        if (timeToDestroy != 0.0f) {
+            Destroy(gameObject, timeToDestroy);
+            
+        }
 	}
 }
