@@ -5,6 +5,9 @@ public class HealthOfPlayer : MonoBehaviour {
 
 	public int health, maxhealth;
 
+	public delegate void DeathDelegate();
+	public DeathDelegate deathDelegate;
+
 	// Use this for initialization
 	void Start () {
 		health = 100;
@@ -25,6 +28,6 @@ public class HealthOfPlayer : MonoBehaviour {
 	}
 
 	void doDead() {
-		// player is dead, here is what happens:
+		deathDelegate();
 	}
 }
