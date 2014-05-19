@@ -5,7 +5,7 @@ public class PlayerSpellcasting : MonoBehaviour {
 	public GameObject fireballPrefab;
 	public GameObject frostballPrefab;
 	public GameObject thunderballPrefab;
-	GameObject cntPrefab = fireballPrefab;
+	GameObject cntPrefab;
 	int currentSpell = 1;
 	int maxSpells = 3;
 
@@ -19,7 +19,7 @@ public class PlayerSpellcasting : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-	
+		cntPrefab = fireballPrefab;
 	}
 
 	void OnGUI() {
