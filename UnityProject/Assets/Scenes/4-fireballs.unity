@@ -827,6 +827,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   fireballPrefab: {fileID: 100000, guid: 224c22ea3ac022b468fa3668819c7762, type: 2}
+  frostballPrefab: {fileID: 100002, guid: 5d12edcf72914c04a9f7b1913cb0ff8e, type: 2}
+  thunderballPrefab: {fileID: 100000, guid: 608faf8991f1eed4e93f86976b74697a, type: 2}
   spellHeight: 1.39999998
   cooldownAmount: 1
   currentCooldown: 0
