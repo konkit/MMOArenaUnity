@@ -5,10 +5,15 @@ public class EnemyBehaviour : MonoBehaviour {
 
 	public GameObject playerObject;
 
-	public float rotationSpeed = 1.0f;
+	public float rotationSpeed = 100.0f;
 
-	public float cooldownAmount = 3.0f, currentCooldown = 0.0f;
+	public float cooldownAmount = 3.0f, currentCooldown = 3.0f;
 	public GameObject fireballPrefab;
+
+	Quaternion lookRotation;
+
+	// minimal angle (in deg) which allows enemy to start shooting fireballs;
+	public float shootAngleThreshold = 5.0f;
 
 	// Use this for initialization
 	void Start () {
@@ -27,7 +32,7 @@ public class EnemyBehaviour : MonoBehaviour {
 		Vector3 direction = (playerObject.transform.position - transform.position).normalized;
 		
 		//create the rotation we need to be in to look at the target
-		Quaternion lookRotation = Quaternion.LookRotation(direction);
+		lookRotation = Quaternion.LookRotation(direction);
 		
 		//rotate us over time according to speed until we are in the required rotation
 		transform.rotation = Quaternion.Slerp(transform.rotation, lookRotation, Time.deltaTime * rotationSpeed);
@@ -35,6 +40,10 @@ public class EnemyBehaviour : MonoBehaviour {
 
 	void ShootFireball ()
 	{
+		if( Quaternion.Angle(lookRotation, transform.rotation) > shootAngleThreshold ) {
+			return;
+		}
+
 		if( currentCooldown <= 0) {
 			Instantiate(fireballPrefab, (transform.position + new Vector3(0.0f, 1.4f, 0.0f)) + transform.forward, transform.rotation);
 			currentCooldown = cooldownAmount;
