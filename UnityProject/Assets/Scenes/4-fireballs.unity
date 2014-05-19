@@ -2443,6 +2443,7 @@ MonoBehaviour:
   cooldownAmount: 3
   currentCooldown: 0
   fireballPrefab: {fileID: 100000, guid: 224c22ea3ac022b468fa3668819c7762, type: 2}
+  shootAngleThreshold: 10
 --- !u!114 &868453178
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3855,6 +3856,46 @@ Transform:
   m_Children:
   - {fileID: 2037989900}
   m_Father: {fileID: 491175787}
+--- !u!1 &1443588897
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 1443588899}
+  - 114: {fileID: 1443588898}
+  m_Layer: 0
+  m_Name: ScriptHolder
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1443588898
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1443588897}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e8c2d851da76eb84ea8230e66604edda, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  enemy: {fileID: 868453171}
+  player: {fileID: 306341454}
+--- !u!4 &1443588899
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1443588897}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -6.65820742, y: -.00732383132, z: 1.24190009}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
 --- !u!1 &1468010620
 GameObject:
   m_ObjectHideFlags: 0
