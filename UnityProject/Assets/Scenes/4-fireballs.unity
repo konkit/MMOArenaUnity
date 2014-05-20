@@ -828,7 +828,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   fireballPrefab: {fileID: 100000, guid: 224c22ea3ac022b468fa3668819c7762, type: 2}
   frostballPrefab: {fileID: 100002, guid: 5d12edcf72914c04a9f7b1913cb0ff8e, type: 2}
-  thunderballPrefab: {fileID: 100000, guid: 608faf8991f1eed4e93f86976b74697a, type: 2}
+  thunderballPrefab: {fileID: 100000, guid: 9acfc229f0789344f99f8544ce874323, type: 2}
   spellHeight: 1.39999998
   cooldownAmount: 1
   currentCooldown: 0
@@ -2443,7 +2443,7 @@ MonoBehaviour:
   cooldownAmount: 3
   currentCooldown: 0
   fireballPrefab: {fileID: 100000, guid: 224c22ea3ac022b468fa3668819c7762, type: 2}
-  shootAngleThreshold: 10
+  shootAngleThreshold: 5
 --- !u!114 &868453178
 MonoBehaviour:
   m_ObjectHideFlags: 0
