@@ -7,11 +7,12 @@ public class HealthOfPlayer : MonoBehaviour {
 
 	public delegate void DeathDelegate();
 	public DeathDelegate deathDelegate;
-
+    public bool isDeath;
 	// Use this for initialization
 	void Start () {
 		health = 100;
 		maxhealth = 100;
+        isDeath = false;
 	}
 	
 	// Update is called once per frame
@@ -28,6 +29,7 @@ public class HealthOfPlayer : MonoBehaviour {
 	}
 
 	void doDead() {
+        isDeath = true;
 		deathDelegate();
 	}
 }

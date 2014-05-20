@@ -5,12 +5,16 @@ public class AnimationController : MonoBehaviour
 {
     Animator anim;
     PlayerMovementController playerController;
+    HealthOfPlayer death;
+    CapsuleCollider colliderr;
 
 
     void Start()
     {
         anim = GetComponent<Animator>();
         playerController = GetComponent<PlayerMovementController>();
+        death = GetComponent<HealthOfPlayer>();
+        colliderr = GetComponent<CapsuleCollider>();
     }
 
     void Update()
@@ -18,6 +22,7 @@ public class AnimationController : MonoBehaviour
         ForwardAnimation();
         JumpAnimation();
         PunchAnimation();
+        DeathAnimation();
     }
 
     void ForwardAnimation()
@@ -43,6 +48,14 @@ public class AnimationController : MonoBehaviour
         if (Input.GetMouseButtonDown(0))
         {
             anim.SetTrigger("punch");
+        }
+    }
+    void DeathAnimation()
+    {
+        if(death.isDeath)
+        {
+            anim.SetBool("isDeath", death.isDeath);
+            colliderr.enabled=false;
         }
     }
 }

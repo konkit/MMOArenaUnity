@@ -793,6 +793,7 @@ GameObject:
   - 114: {fileID: 306341457}
   - 114: {fileID: 306341456}
   - 114: {fileID: 306341463}
+  - 135: {fileID: 306341464}
   m_Layer: 0
   m_Name: MAX
   m_TagString: Player
@@ -932,6 +933,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   health: 100
   maxhealth: 100
+  isDeath: 0
+--- !u!135 &306341464
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 306341454}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: .0599999987
+  m_Center: {x: 0, y: .930000007, z: 0}
 --- !u!1 &320377155
 GameObject:
   m_ObjectHideFlags: 0
@@ -2002,6 +2016,14 @@ Prefab:
       propertyPath: fireballPrefab
       value: 
       objectReference: {fileID: 100000, guid: 224c22ea3ac022b468fa3668819c7762, type: 2}
+    - target: {fileID: 11400000, guid: e854eb322803d8c4c9fcc5b4fb5c2748, type: 2}
+      propertyPath: maxhealth
+      value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 11400004, guid: e854eb322803d8c4c9fcc5b4fb5c2748, type: 2}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: e854eb322803d8c4c9fcc5b4fb5c2748, type: 2}
   m_RootGameObject: {fileID: 868453171}
@@ -2425,7 +2447,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   health: 100
-  maxhealth: 0
+  maxhealth: 100
+  isDeath: 0
 --- !u!114 &868453177
 MonoBehaviour:
   m_ObjectHideFlags: 0
