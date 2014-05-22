@@ -27,8 +27,12 @@ public class AnimationController : MonoBehaviour
 
     void ForwardAnimation()
     {
-        float move = Input.GetAxis("Vertical");
-        anim.SetFloat("speed", move);
+        
+        float moveForward = Input.GetAxis("Vertical");
+        anim.SetFloat("forward", moveForward);
+        float moveAside = Input.GetAxis("Horizontal");
+        anim.SetFloat("aside", moveAside);
+        
     }
 
     void JumpAnimation()

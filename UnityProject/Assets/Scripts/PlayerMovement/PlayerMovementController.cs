@@ -1,8 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class PlayerMovementController : MonoBehaviour
-{
+public class PlayerMovementController : MonoBehaviour {
     #region zone variable xD
     public float maxSpeed;
     public bool grounded;
@@ -48,8 +47,7 @@ public class PlayerMovementController : MonoBehaviour
     void JumpController()
     {
         if(Input.GetKeyDown(KeyCode.Space) && grounded)
-        {
-           
+        {           
             rigidbody.AddForce(new Vector3(0, hight, 0));       
         }       
     }
