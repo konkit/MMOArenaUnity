@@ -134,7 +134,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: .100000001
-  damage: 50
+  damage: 15
   explosion: {fileID: 100002, guid: 57137b89e09584e3e839655c51e6f042, type: 2}
 --- !u!135 &13500000
 SphereCollider:

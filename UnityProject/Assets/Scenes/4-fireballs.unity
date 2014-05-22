@@ -8091,6 +8091,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   health: 100
   maxhealth: 100
+  left: 405
+  top: 125
   isDeath: 0
 --- !u!135 &306341464
 SphereCollider:
@@ -15051,6 +15053,14 @@ Prefab:
       propertyPath: m_Enabled
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 11400000, guid: e854eb322803d8c4c9fcc5b4fb5c2748, type: 2}
+      propertyPath: left
+      value: 270
+      objectReference: {fileID: 0}
+    - target: {fileID: 11400000, guid: e854eb322803d8c4c9fcc5b4fb5c2748, type: 2}
+      propertyPath: top
+      value: 125
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: e854eb322803d8c4c9fcc5b4fb5c2748, type: 2}
   m_RootGameObject: {fileID: 868453171}
@@ -18034,6 +18044,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   health: 100
   maxhealth: 100
+  left: 270
+  top: 125
   isDeath: 0
 --- !u!114 &868453177
 MonoBehaviour:
@@ -37529,6 +37541,17 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enemy: {fileID: 868453171}
   player: {fileID: 306341454}
+  labels:
+  - {fileID: 2800000, guid: a40bb22c48b3a57418e3a1c91840c3d4, type: 3}
+  - {fileID: 2800000, guid: ac427a711d8ad3c4ebb373f858f3c9b2, type: 3}
+  width: 500
+  height: 300
+  windowRect:
+    serializedVersion: 2
+    x: 0
+    y: 0
+    width: 0
+    height: 0
 --- !u!4 &1443588899
 Transform:
   m_ObjectHideFlags: 0
@@ -38690,16 +38713,16 @@ Transform:
   m_LocalPosition: {x: .461614132, y: 3.43521094, z: 6.44937754}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
-  - {fileID: 29679846}
-  - {fileID: 1690633816}
-  - {fileID: 1364447106}
-  - {fileID: 463581384}
-  - {fileID: 1416185281}
-  - {fileID: 1617329062}
-  - {fileID: 1279766354}
-  - {fileID: 829070181}
   - {fileID: 1243539476}
+  - {fileID: 1279766354}
+  - {fileID: 1416185281}
+  - {fileID: 29679846}
+  - {fileID: 1364447106}
+  - {fileID: 1617329062}
+  - {fileID: 829070181}
   - {fileID: 1274327988}
+  - {fileID: 1690633816}
+  - {fileID: 463581384}
   m_Father: {fileID: 0}
 --- !u!1 &1506485743
 GameObject:
