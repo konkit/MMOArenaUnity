@@ -71,11 +71,11 @@ public class GameController : MonoBehaviour {
 
     void MenuGame()
     {
-        if (GUI.Button(new Rect(50, 180, 200, 70), "Restart"))
+        if (GUI.Button(new Rect(50, 180, 200, 70), "Restart") || Input.GetKeyDown(KeyCode.P))
         {
             Application.LoadLevel(Application.loadedLevel);
         }
-        if (GUI.Button(new Rect(260, 180, 200, 70), "Exit"))
+        if (GUI.Button(new Rect(260, 180, 200, 70), "Exit") || Input.GetKeyDown(KeyCode.Escape))
         {
             Application.Quit();
         }
