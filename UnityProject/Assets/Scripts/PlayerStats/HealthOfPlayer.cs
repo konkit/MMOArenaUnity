@@ -3,15 +3,34 @@ using System.Collections;
 
 public class HealthOfPlayer : MonoBehaviour {
 
-	public int health, maxhealth;
+	public float health, maxhealth;
     public float left, top;
 	public delegate void DeathDelegate();
 	public DeathDelegate deathDelegate;
     public bool isDeath;
+
+    public Texture healthbarbaseTexture;
+    public Texture healthbargreenTexture;
+    public Texture healthbaryellowTexture;
+    public Texture healthbarredTexture;
+
+    private Texture baseTxPlayer;
+    private Texture greenTxPlayer;
+    private Texture yellowTxPlayer;
+    private Texture redTxPlayer;
+
+    private Texture baseTxEnemy;
+    private Texture greenTxEnemy;
+    private Texture yellowTxEnemy;
+    private Texture redTxEnemy;
+
 	// Use this for initialization
 	void Start () {
-		health = 100;
+
+        SetupTextures();
+
 		maxhealth = 100;
+		health = maxhealth;
         isDeath = false;
 	}
 	
@@ -35,15 +54,70 @@ public class HealthOfPlayer : MonoBehaviour {
 	}
 
     void OnGUI()
-    {        
-        if(gameObject.tag == "Player")
+    {
+        Rect playerHealthBarPosition = new Rect(20, 20, baseTxPlayer.width, baseTxPlayer.height);
+        Rect enemyHealthBarPostion = new Rect(Screen.width - baseTxEnemy.width - 20, 20, baseTxEnemy.width, baseTxEnemy.height);
+
+        if (gameObject.tag == "Player")
         {
-            GUI.Box(new Rect(Screen.width / 2-left, Screen.height / 2-top, 100, 20), "Health: " + health.ToString());
+            GUI.DrawTexture(playerHealthBarPosition, baseTxPlayer);
+            
+            DrawHealthBarProgress(health, playerHealthBarPosition, greenTxPlayer, yellowTxPlayer, redTxPlayer);
         }
-        if(gameObject.tag == "Enemy")
+        if (gameObject.tag == "Enemy")
         {
-            GUI.Box(new Rect(Screen.width / 2 + left, Screen.height / 2 - top, 130, 20), "Health Enemy: " + health.ToString());
+            GUI.DrawTexture(enemyHealthBarPostion, healthbarbaseTexture);
+
+            DrawHealthBarProgress(health, enemyHealthBarPostion, greenTxEnemy, yellowTxEnemy, redTxEnemy);
         }
-        
+    }
+    void DrawHealthBarProgress(float current_health, Rect position, Texture greenTx, Texture yellowTx, Texture redTx)
+    {
+
+        int maxBazSize = 200;
+        Texture currentTexture;
+        float healthPercent = current_health / maxhealth;
+        float healthBarSize = healthPercent * maxBazSize;
+
+        if (healthPercent > 0.65)
+        {
+            currentTexture = greenTx;
+        }
+        else if (healthPercent > 0.35)
+        {
+            currentTexture = yellowTx;
+        }
+        else
+        {
+            currentTexture = redTx;
+        }
+
+        Rect barPos = new Rect(position.xMin, position.yMin, position.width * healthPercent, position.height);
+
+        GUI.DrawTexture(barPos, currentTexture);
+    }
+
+    void DrawQuad(Rect position, Color color) {
+        Texture2D texture = new Texture2D(1, 1);
+        texture.SetPixel(0,0,color);
+        texture.Apply();
+        GUI.skin.box.normal.background = texture;
+        GUI.Box(position, GUIContent.none);
+    }
+
+    void SetupTextures()
+    {
+        baseTxPlayer = healthbarbaseTexture;
+        greenTxPlayer = healthbargreenTexture;
+        yellowTxPlayer = healthbaryellowTexture;
+        redTxPlayer = healthbarredTexture;
+
+        //renderer.material.SetTextureScale("baseTxPlayer", new Vector2(1,-1));
+
+
+        baseTxEnemy = healthbarbaseTexture;
+        greenTxEnemy = healthbargreenTexture;
+        yellowTxEnemy = healthbaryellowTexture;
+        redTxEnemy = healthbarredTexture;
     }
 }

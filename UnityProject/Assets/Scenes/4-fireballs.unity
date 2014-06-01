@@ -8094,6 +8094,13 @@ MonoBehaviour:
   left: 405
   top: 125
   isDeath: 0
+  healthbarbaseTexture: {fileID: 2800000, guid: 712cc3252dfe40247afb843aaf368674,
+    type: 3}
+  healthbargreenTexture: {fileID: 2800000, guid: c85a637e695d957488feb382111eeb26,
+    type: 3}
+  healthbaryellowTexture: {fileID: 2800000, guid: 4ab1ca37e5b4bc644b99e72a6b647ec9,
+    type: 3}
+  healthbarredTexture: {fileID: 2800000, guid: a799f596b48e59842ab3bdf05050b782, type: 3}
 --- !u!135 &306341464
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -15061,6 +15068,22 @@ Prefab:
       propertyPath: top
       value: 125
       objectReference: {fileID: 0}
+    - target: {fileID: 11400000, guid: e854eb322803d8c4c9fcc5b4fb5c2748, type: 2}
+      propertyPath: healthbarbaseTexture
+      value: 
+      objectReference: {fileID: 2800000, guid: 712cc3252dfe40247afb843aaf368674, type: 3}
+    - target: {fileID: 11400000, guid: e854eb322803d8c4c9fcc5b4fb5c2748, type: 2}
+      propertyPath: healthbargreenTexture
+      value: 
+      objectReference: {fileID: 2800000, guid: c85a637e695d957488feb382111eeb26, type: 3}
+    - target: {fileID: 11400000, guid: e854eb322803d8c4c9fcc5b4fb5c2748, type: 2}
+      propertyPath: healthbaryellowTexture
+      value: 
+      objectReference: {fileID: 2800000, guid: 4ab1ca37e5b4bc644b99e72a6b647ec9, type: 3}
+    - target: {fileID: 11400000, guid: e854eb322803d8c4c9fcc5b4fb5c2748, type: 2}
+      propertyPath: healthbarredTexture
+      value: 
+      objectReference: {fileID: 2800000, guid: a799f596b48e59842ab3bdf05050b782, type: 3}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: e854eb322803d8c4c9fcc5b4fb5c2748, type: 2}
   m_RootGameObject: {fileID: 868453171}
@@ -18047,6 +18070,13 @@ MonoBehaviour:
   left: 270
   top: 125
   isDeath: 0
+  healthbarbaseTexture: {fileID: 2800000, guid: 712cc3252dfe40247afb843aaf368674,
+    type: 3}
+  healthbargreenTexture: {fileID: 2800000, guid: c85a637e695d957488feb382111eeb26,
+    type: 3}
+  healthbaryellowTexture: {fileID: 2800000, guid: 4ab1ca37e5b4bc644b99e72a6b647ec9,
+    type: 3}
+  healthbarredTexture: {fileID: 2800000, guid: a799f596b48e59842ab3bdf05050b782, type: 3}
 --- !u!114 &868453177
 MonoBehaviour:
   m_ObjectHideFlags: 0
