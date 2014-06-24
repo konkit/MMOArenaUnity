@@ -8,6 +8,8 @@ public class AnimationController : MonoBehaviour
     HealthOfPlayer death;
     CapsuleCollider colliderr;
 
+	CharacterControlInterface characterControlInterface;
+
 
     void Start()
     {
@@ -15,6 +17,8 @@ public class AnimationController : MonoBehaviour
         playerController = GetComponent<PlayerMovementController>();
         death = GetComponent<HealthOfPlayer>();
         colliderr = GetComponent<CapsuleCollider>();
+
+		characterControlInterface = GetComponent<CharacterControlInterface>();
     }
 
     void Update()
@@ -27,37 +31,26 @@ public class AnimationController : MonoBehaviour
 
     void ForwardAnimation()
     {
-        
-        float moveForward = Input.GetAxis("Vertical");
-        anim.SetFloat("forward", moveForward);
-        float moveAside = Input.GetAxis("Horizontal");
-        anim.SetFloat("aside", moveAside);
-        
+    	anim.SetFloat("forward", characterControlInterface.forwardMov);
+		anim.SetFloat("aside", characterControlInterface.sidewaysMov);
     }
 
     void JumpAnimation()
     {
-        if (playerController.isJump)
-        {
-            anim.SetBool("jumpTr", true);
-        }
-        else
-        {
-            anim.SetBool("jumpTr", false);
-        }
-    }
-
+		anim.SetBool("jumpTr", characterControlInterface.isJump);
+	}
+	
     void PunchAnimation()
     {
-        if (Input.GetMouseButtonDown(0))
-        {
+		if ( characterControlInterface.isPunch )
+		{
             anim.SetTrigger("punch");
         }
     }
     void DeathAnimation()
     {
-        if(death.isDeath)
-        {
+		if( death.isDeath )
+		{
             anim.SetBool("isDeath", death.isDeath);
             colliderr.enabled=false;
         }

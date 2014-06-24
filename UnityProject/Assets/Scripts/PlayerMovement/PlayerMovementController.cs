@@ -8,23 +8,30 @@ public class PlayerMovementController : MonoBehaviour {
     public bool isJump;
     public float hight;
 
+	public CharacterControlInterface characterControlInterface;
     
     #endregion
 
     void Awake()
     {        
         isJump = false;
+		characterControlInterface = GetComponent<CharacterControlInterface>();
     }
     
     void Update()
     {       
         JumpController();
     }
+
     void FixedUpdate()
     {
         if(grounded)
         {
-            Vector3 moveTarget = new Vector3(Input.GetAxis("Horizontal") * maxSpeed, rigidbody.velocity.y, Input.GetAxis("Vertical") * maxSpeed);
+            Vector3 moveTarget = new Vector3(
+				characterControlInterface.sidewaysMov * maxSpeed, 
+				rigidbody.velocity.y, 
+				characterControlInterface.forwardMov * maxSpeed 
+				);
             moveTarget = transform.TransformDirection(moveTarget);
             rigidbody.velocity = moveTarget;
         }
@@ -46,7 +53,7 @@ public class PlayerMovementController : MonoBehaviour {
     }
     void JumpController()
     {
-        if(Input.GetKeyDown(KeyCode.Space) && grounded)
+        if( characterControlInterface.isJump && grounded)
         {           
             rigidbody.AddForce(new Vector3(0, hight, 0));       
         }       

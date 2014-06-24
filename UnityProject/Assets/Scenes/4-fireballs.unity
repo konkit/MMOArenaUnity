@@ -8014,6 +8014,8 @@ GameObject:
   - 114: {fileID: 306341456}
   - 114: {fileID: 306341463}
   - 135: {fileID: 306341464}
+  - 114: {fileID: 306341465}
+  - 114: {fileID: 306341466}
   m_Layer: 0
   m_Name: MAX
   m_TagString: Player
@@ -8097,6 +8099,7 @@ MonoBehaviour:
   grounded: 0
   isJump: 0
   hight: 300
+  characterControlInterface: {fileID: 0}
 --- !u!136 &306341460
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -8175,6 +8178,32 @@ SphereCollider:
   serializedVersion: 2
   m_Radius: .0599999987
   m_Center: {x: 0, y: .930000007, z: 0}
+--- !u!114 &306341465
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 306341454}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5aa26a30ed016e043b0a84aa11fafcfd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  forwardMov: 0
+  sidewaysMov: 0
+  isJump: 0
+  isPunch: 0
+--- !u!114 &306341466
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 306341454}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8995cc08058feab42bd1a67a9a9f2389, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &320377155
 GameObject:
   m_ObjectHideFlags: 0
@@ -18104,6 +18133,9 @@ GameObject:
   - 114: {fileID: 868453178}
   - 114: {fileID: 868453177}
   - 114: {fileID: 868453176}
+  - 114: {fileID: 868453180}
+  - 114: {fileID: 868453179}
+  - 114: {fileID: 868453181}
   m_Layer: 0
   m_Name: Opponent
   m_TagString: Enemy
@@ -18225,6 +18257,49 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6713bcde451ca814fad120730952aa5e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &868453179
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 868453171}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6713bcde451ca814fad120730952aa5e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &868453180
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 868453171}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5aa26a30ed016e043b0a84aa11fafcfd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  forwardMov: 0
+  sidewaysMov: 0
+  isJump: 0
+  isPunch: 0
+--- !u!114 &868453181
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 868453171}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5e3b7d37ccb08784b9a2db3b24b2b00e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  fireballPrefab: {fileID: 100000, guid: 224c22ea3ac022b468fa3668819c7762, type: 2}
+  frostballPrefab: {fileID: 100002, guid: 5d12edcf72914c04a9f7b1913cb0ff8e, type: 2}
+  thunderballPrefab: {fileID: 100000, guid: 9acfc229f0789344f99f8544ce874323, type: 2}
+  spellHeight: 1.39999998
+  cooldownAmount: 1
+  currentCooldown: 0
 --- !u!1 &884782247
 GameObject:
   m_ObjectHideFlags: 0

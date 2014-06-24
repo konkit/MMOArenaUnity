@@ -9,6 +9,8 @@ public class PlayerSpellcasting : MonoBehaviour {
 	int currentSpell = 1;
 	int maxSpells = 3;
 
+	CharacterControlInterface controlInterface;
+
 	public float spellHeight = 1.4f;
 
 	public float cooldownAmount = 1.0f, currentCooldown = 0.0f;
@@ -20,6 +22,8 @@ public class PlayerSpellcasting : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 		cntPrefab = fireballPrefab;
+
+		controlInterface = GetComponent<CharacterControlInterface>();
 	}
 
 	void OnGUI() {
@@ -32,9 +36,10 @@ public class PlayerSpellcasting : MonoBehaviour {
 			currentCooldown -= Time.deltaTime;
 		}
 
-		if( Input.GetKey(KeyCode.Mouse0) ) {
+		if( controlInterface.isPunch ) {
 			if( currentCooldown <= 0.0f ) {
-				GetComponent<MouseController>().AlignRotation();
+				MouseController mouse = GetComponent<MouseController>();
+				if( mouse ) mouse.AlignRotation();
 
 				Debug.Log("Attacking");
 
@@ -45,9 +50,9 @@ public class PlayerSpellcasting : MonoBehaviour {
 
 				currentCooldown = cooldownAmount;
 			}
-		} else if( Input.GetKeyDown( KeyCode.Q ) ) {
+		} else if( controlInterface.previousSpell ) {
 			PreviousSpell();
-		} else if( Input.GetKeyDown( KeyCode.E ) ) {
+		} else if( controlInterface.nextSpell ) {
 			NextSpell();
 		}
 	}

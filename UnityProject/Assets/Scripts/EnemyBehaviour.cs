@@ -15,9 +15,11 @@ public class EnemyBehaviour : MonoBehaviour {
 	// minimal angle (in deg) which allows enemy to start shooting fireballs;
 	public float shootAngleThreshold = 5.0f;
 
+	CharacterControlInterface controlInterface;
+
 	// Use this for initialization
 	void Start () {
-	
+		controlInterface = GetComponent<CharacterControlInterface>();
 	}
 	
 	// Update is called once per frame
@@ -45,9 +47,10 @@ public class EnemyBehaviour : MonoBehaviour {
 		}
 
 		if( currentCooldown <= 0) {
-			Instantiate(fireballPrefab, (transform.position + new Vector3(0.0f, 1.4f, 0.0f)) + transform.forward, transform.rotation);
+			controlInterface.isPunch = true;
 			currentCooldown = cooldownAmount;
 		} else {
+			controlInterface.isPunch = false;
 			currentCooldown -= Time.deltaTime;
 		}
 	}

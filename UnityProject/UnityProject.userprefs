@@ -1,13 +1,10 @@
 ﻿<Properties>
-  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="MonoDevelop.Default" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Scripts\PlayerStats\HealthOfPlayer.cs">
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Scripts\PlayerMovement\CharacterControlInterface.cs">
     <Files>
-      <File FileName="Assets\Scripts\PlayerStats\HealthOfPlayer.cs" Line="1" Column="1" />
-      <File FileName="Assets\Scripts\PlayerSpellcasting.cs" Line="1" Column="1" />
-      <File FileName="Assets\Scripts\PlayerStats\HealthOfPlayer.cs" Line="1" Column="1" />
-      <File FileName="Assets\Scripts\FireballBehaviour.cs" Line="1" Column="1" />
-      <File FileName="Assets\Scripts\PlayerMovement\AnimationController.cs" Line="1" Column="1" />
-      <File FileName="Assets\Scripts\PlayerMovement\MouseController.cs" Line="1" Column="1" />
+      <File FileName="Assets\Scripts\PlayerMovement\CharacterControlInterface.cs" Line="8" Column="29" />
+      <File FileName="Assets\Scripts\PlayerMovement\AnimationController.cs" Line="52" Column="20" />
+      <File FileName="Assets\Scripts\PlayerMovement\PlayerMovementController.cs" Line="31" Column="42" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
