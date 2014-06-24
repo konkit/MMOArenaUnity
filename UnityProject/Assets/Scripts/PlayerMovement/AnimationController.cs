@@ -26,13 +26,13 @@ public class AnimationController : MonoBehaviour
         ForwardAnimation();
         JumpAnimation();
         PunchAnimation();
-        DeathAnimation();
+        DeathAnimation();        
     }
 
     void ForwardAnimation()
     {
-    	anim.SetFloat("forward", characterControlInterface.forwardMov);
-		anim.SetFloat("aside", characterControlInterface.sidewaysMov);
+    	anim.SetFloat("forward", Mathf.Abs( characterControlInterface.forwardMov) );
+		anim.SetFloat("aside", Mathf.Abs(characterControlInterface.sidewaysMov));
     }
 
     void JumpAnimation()

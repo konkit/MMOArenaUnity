@@ -8154,8 +8154,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f4357130d693e0e46ad5fa942ce8e632, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  health: 100
-  maxhealth: 100
+  health: 500
+  maxhealth: 500
   left: 405
   top: 125
   isDeath: 0
@@ -8193,6 +8193,8 @@ MonoBehaviour:
   sidewaysMov: 0
   isJump: 0
   isPunch: 0
+  nextSpell: 0
+  previousSpell: 0
 --- !u!114 &306341466
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -15173,7 +15175,7 @@ Prefab:
       objectReference: {fileID: 100000, guid: 224c22ea3ac022b468fa3668819c7762, type: 2}
     - target: {fileID: 11400000, guid: e854eb322803d8c4c9fcc5b4fb5c2748, type: 2}
       propertyPath: maxhealth
-      value: 100
+      value: 500
       objectReference: {fileID: 0}
     - target: {fileID: 11400004, guid: e854eb322803d8c4c9fcc5b4fb5c2748, type: 2}
       propertyPath: m_Enabled
@@ -15203,6 +15205,10 @@ Prefab:
       propertyPath: healthbarredTexture
       value: 
       objectReference: {fileID: 2800000, guid: a799f596b48e59842ab3bdf05050b782, type: 3}
+    - target: {fileID: 11400000, guid: e854eb322803d8c4c9fcc5b4fb5c2748, type: 2}
+      propertyPath: health
+      value: 500
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: e854eb322803d8c4c9fcc5b4fb5c2748, type: 2}
   m_RootGameObject: {fileID: 868453171}
@@ -18215,8 +18221,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f4357130d693e0e46ad5fa942ce8e632, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  health: 100
-  maxhealth: 100
+  health: 500
+  maxhealth: 500
   left: 270
   top: 125
   isDeath: 0
@@ -18283,6 +18289,8 @@ MonoBehaviour:
   sidewaysMov: 0
   isJump: 0
   isPunch: 0
+  nextSpell: 0
+  previousSpell: 0
 --- !u!114 &868453181
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -123,7 +123,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: .5
   damage: 25
-  explosion: {fileID: 100002, guid: 57137b89e09584e3e839655c51e6f042, type: 2}
+  explosion: {fileID: 100000, guid: 8e1dcf1924b1945fcaab73df0affd2ab, type: 2}
 --- !u!114 &11400002
 MonoBehaviour:
   m_ObjectHideFlags: 1

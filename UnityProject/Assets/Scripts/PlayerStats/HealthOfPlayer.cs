@@ -29,7 +29,7 @@ public class HealthOfPlayer : MonoBehaviour {
 
         SetupTextures();
 
-		maxhealth = 100;
+		//maxhealth = 100;
 		health = maxhealth;
         isDeath = false;
 	}
