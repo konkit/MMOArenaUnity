@@ -25,9 +25,9 @@ public class Torchelight : MonoBehaviour {
 		if (IntensityLight<0) IntensityLight=0;
 		if (IntensityLight>MaxLightIntensity) IntensityLight=MaxLightIntensity;		
 
-		TorchLight.light.intensity=IntensityLight/2f+Mathf.Lerp(IntensityLight-0.1f,IntensityLight+0.1f,Mathf.Cos(Time.time*30));
+		//TorchLight.light.intensity=IntensityLight/2f+Mathf.Lerp(IntensityLight-0.1f,IntensityLight+0.1f,Mathf.Cos(Time.time*30));
 
-		TorchLight.light.color=new Color(Mathf.Min(IntensityLight/1.5f,1f),Mathf.Min(IntensityLight/2f,1f),0f);
+		//TorchLight.light.color=new Color(Mathf.Min(IntensityLight/1.5f,1f),Mathf.Min(IntensityLight/2f,1f),0f);
 		MainFlame.GetComponent<ParticleSystem>().emissionRate=IntensityLight*20f;
 		BaseFlame.GetComponent<ParticleSystem>().emissionRate=IntensityLight*15f;
 		Etincelles.GetComponent<ParticleSystem>().emissionRate=IntensityLight*7f;
