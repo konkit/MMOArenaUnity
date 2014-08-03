@@ -1,19 +1,21 @@
 ﻿using UnityEngine;
 using System.Collections;
-using SimpleJSON;
+
+using System.Xml;
+using System.Xml.Serialization;
+using System.IO;
+using System.Text;
 
 public class RetreiveDataScript : MonoBehaviour {
-
-	string serverAddress = "http://localhost:8080/GrailsMMOArenaBackend/fight/";
-	public int playerID;
+	// server connection data
+	string serverAddress = "http://localhost:8080/GrailsMMOArenaBackend";
+	string controllerName = "/fight";
+	string actionName = "/requestFightData";
 		
 	// Data from backend
-	public string characterName;
-	public int characterLevel;
-	public int characterExp;
+	public FightData fightData;
 
-	public string items;
-	
+	// Debug rectangles
 	public Rect retreiveDataButtonRect;
 	public Rect storeDataButtonRect;
 	
@@ -38,9 +40,7 @@ public class RetreiveDataScript : MonoBehaviour {
 	}
 	
 	IEnumerator Retreive() {	
-		string webaddress = serverAddress + "requestPlayerData?playerID=" + playerID.ToString();
-
-		Debug.Log("web address = " + webaddress);
+		string webaddress = serverAddress + controllerName + actionName;
 
 		WWW www = new WWW(webaddress );
 		yield return www;
@@ -50,20 +50,20 @@ public class RetreiveDataScript : MonoBehaviour {
 		}
 		
 		string responseData = www.text;		
-		Debug.Log(responseData);
 
-		var N = JSON.Parse(responseData);
-		characterName = N["character"]["name"];
-		characterLevel = int.Parse (N["character"]["level"]);
-		characterExp = int.Parse( N["character"]["exp"] );
-		items = N["items"][0]["name"];
+		var serializer = new XmlSerializer(typeof(FightData));
+		var stream = new MemoryStream( Encoding.ASCII.GetBytes(responseData));
+		fightData = serializer.Deserialize(stream) as FightData;
+		stream.Close();
+
+		Debug.Log ("fightData item 1 name : " + fightData.PlayerItems[0].item.name );
 	}
 
 
 	IEnumerator SendFightResponse() {
 		int gainedExp = 1;
 
-		string webaddress = serverAddress + "storeResults?playerID=" + playerID.ToString() + "&gainedExp=" + gainedExp;
+		string webaddress = serverAddress;
 		
 		Debug.Log("web address = " + webaddress);
 
