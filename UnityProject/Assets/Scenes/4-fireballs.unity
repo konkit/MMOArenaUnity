@@ -8127,6 +8127,8 @@ GameObject:
   - 135: {fileID: 306341464}
   - 114: {fileID: 306341465}
   - 114: {fileID: 306341466}
+  - 114: {fileID: 306341467}
+  - 114: {fileID: 306341468}
   m_Layer: 0
   m_Name: MAX
   m_TagString: Player
@@ -8317,6 +8319,40 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8995cc08058feab42bd1a67a9a9f2389, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &306341467
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 306341454}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 99dc3facc9541cf43aa2ffa7984fdf9a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  itemListRect:
+    serializedVersion: 2
+    x: 10
+    y: 100
+    width: 200
+    height: 20
+--- !u!114 &306341468
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 306341454}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d46d2cc89d8a3c0449d987cd34d6ab14, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  spellListRect:
+    serializedVersion: 2
+    x: 10
+    y: 300
+    width: 200
+    height: 20
 --- !u!1 &320377155
 GameObject:
   m_ObjectHideFlags: 0
@@ -38283,6 +38319,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 43c9dab854f56254481f109e1be0c152, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  player: {fileID: 306341454}
   retreiveDataButtonRect:
     serializedVersion: 2
     x: 500
@@ -47694,6 +47731,10 @@ Prefab:
       propertyPath: storeDataButtonRect.height
       value: 50
       objectReference: {fileID: 0}
+    - target: {fileID: 11400000, guid: adfa7c31357a11848927d66da9a8e138, type: 2}
+      propertyPath: player
+      value: 
+      objectReference: {fileID: 306341454}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: adfa7c31357a11848927d66da9a8e138, type: 2}
   m_RootGameObject: {fileID: 1441629374}

@@ -11,6 +11,8 @@ public class RetreiveDataScript : MonoBehaviour {
 	string serverAddress = "http://localhost:8080/GrailsMMOArenaBackend";
 	string controllerName = "/fight";
 	string actionName = "/requestFightData";
+
+	public GameObject player;
 		
 	// Data from backend
 	public FightData fightData;
@@ -56,7 +58,10 @@ public class RetreiveDataScript : MonoBehaviour {
 		fightData = serializer.Deserialize(stream) as FightData;
 		stream.Close();
 
-		Debug.Log ("fightData item 1 name : " + fightData.PlayerItems[0].item.name );
+		player.GetComponent<PlayerInventory>().LoadInventory(fightData);
+		player.GetComponent<PlayerSpells>().LoadSpells(fightData);
+
+		Debug.Log ("fightData item 1 name : " + fightData.Player.Items[0].item.name );
 	}
 
 

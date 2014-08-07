@@ -11,10 +11,6 @@ public class FightData {
 	[XmlElement("player")]
 	public Character Player { get; set; }
 
-	[XmlArray("playerItems")]
-	[XmlArrayItem("itemPossession")]
-	public List<ItemPossession> PlayerItems { get; set; }
-
 	[XmlElement("enemy")]
 	public Character Enemy { get; set; }
 }
@@ -32,27 +28,42 @@ public class Character {
 	[XmlElement("coins")]
 	public int Coins { get; set; }
 
+	[XmlArray("items")]
+	[XmlArrayItem("itemPossession")]
+	public List<ItemPossession> Items { get; set; }
+
+	[XmlArray("spells")]
+	[XmlArrayItem("spellPossession")]
+	public List<SpellPossession> Spells { get; set; }
+
 }
 
 public class Item {
 	[XmlElement("name")]
-	public string name;
+	public string name { get; set; }
 }
 
 public class Spell { 
-	public int damage;
+	[XmlElement("name")]
+	public string name {get; set;}
+
+	[XmlElement("damage")]
+	public int damage { get; set; }
 }
 
 public class ItemPossession {
 	[XmlElement("item")]
-	public Item item;
+	public Item item { get; set; }
 		
-	public int amount;
-	public bool isEquiped;
+	[XmlElement("amount")]
+	public int amount { get; set; }
+
+	[XmlElement("isEquiped")]
+	public bool isEquiped { get; set; }
 }
 
 public class SpellPossession {
-	public Character owner;
-	public Spell spell;
+	[XmlElement("spell")]
+	public Spell spell { get; set;}
 }
 
