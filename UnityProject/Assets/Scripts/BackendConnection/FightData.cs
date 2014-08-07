@@ -49,6 +49,12 @@ public class Spell {
 
 	[XmlElement("damage")]
 	public int damage { get; set; }
+
+	[XmlElement("cooldownTime")]
+	public int cooldownTime { get; set; }
+
+	[XmlElement("prefabType")]
+	public int prefabType { get; set; }
 }
 
 public class ItemPossession {

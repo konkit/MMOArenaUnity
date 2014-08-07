@@ -1,55 +1,45 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 
 public class PlayerSpellcasting : MonoBehaviour {
-	public GameObject fireballPrefab;
-	public GameObject frostballPrefab;
-	public GameObject thunderballPrefab;
-	GameObject cntPrefab;
-	int currentSpell = 1;
-	int maxSpells = 3;
+	//Spell prefabs
+	public GameObject[] prefabs;
+
+	//List with spell data from server
+	public List<SpellPossession> spellPossession;
+
+	// setting of current spellCasting
+	public int currentSpellNum = 1;
+
+	public float spellHeight = 1.4f;
+	public float currentCooldown = 0.0f;
 
 	CharacterControlInterface controlInterface;
 
-	public float spellHeight = 1.4f;
-
-	public float cooldownAmount = 1.0f, currentCooldown = 0.0f;
-
-
-
 	Rect currentSpellRect = new Rect(10, 10, 200, 30);
+
+	Rect spellListRect = new Rect(10, 300, 200, 30);
 
 	// Use this for initialization
 	void Start () {
-		cntPrefab = fireballPrefab;
-
 		controlInterface = GetComponent<CharacterControlInterface>();
-	}
 
-	void OnGUI() {
-		GUI.Label( currentSpellRect, "Current spell : " + GetSpellName( currentSpell ) );
+		LoadSpellPrefabs();
 	}
 	
 	// Update is called once per frame
 	void Update () {
+		if( spellPossession == null ) {
+			return;
+		}
+
 		if( currentCooldown > 0.0f ) {
-			currentCooldown -= Time.deltaTime;
+			currentCooldown -= Time.deltaTime * 1000;
 		}
 
 		if( controlInterface.isPunch ) {
-			if( currentCooldown <= 0.0f ) {
-				MouseController mouse = GetComponent<MouseController>();
-				if( mouse ) mouse.AlignRotation();
-
-				Debug.Log("Attacking");
-
-
-
-				Instantiate(cntPrefab, (transform.position + new Vector3(0.0f, spellHeight, 0.0f)) + transform.forward, transform.rotation);
-
-
-				currentCooldown = cooldownAmount;
-			}
+			castCurrentSpell();
 		} else if( controlInterface.previousSpell ) {
 			PreviousSpell();
 		} else if( controlInterface.nextSpell ) {
@@ -57,61 +47,63 @@ public class PlayerSpellcasting : MonoBehaviour {
 		}
 	}
 
+	void castCurrentSpell() {
+		if( currentCooldown <= 0.0f ) {
+			MouseController mouse = GetComponent<MouseController>();
+			if( mouse ) mouse.AlignRotation();
+
+			Spell cntSpell = spellPossession[currentSpellNum].spell;
+			GameObject cntPrefab = prefabs[cntSpell.prefabType];
+
+			Vector3 instantiatePos = (transform.position + new Vector3(0.0f, spellHeight, 0.0f)) + transform.forward;
+			Instantiate(cntPrefab, instantiatePos, transform.rotation);
+
+			currentCooldown = cntSpell.cooldownTime;
+		}
+	}
+
 	void PreviousSpell ()
 	{
-		if( currentSpell <= 1 ) {
-			currentSpell = maxSpells;
+		if( currentSpellNum <= 0 ) {
+			currentSpellNum = spellPossession.Count - 1;
 		} else {
-			currentSpell--;
-		}
-
-		switch(currentSpell) {
-		case 1:
-			cntPrefab = fireballPrefab;
-			break;
-		case 2:
-			cntPrefab = frostballPrefab;
-			break;
-		case 3:
-			cntPrefab = thunderballPrefab;
-			break;
+			currentSpellNum--;
 		}
 	}
 	
 	void NextSpell ()
 	{
-		if( currentSpell >= maxSpells ) {
-			currentSpell = 1;
+		if( currentSpellNum >= spellPossession.Count - 1) {
+			currentSpellNum = 0;
 		} else {
-			currentSpell++;
+			currentSpellNum++;
 		}
+	}
 
-		switch(currentSpell) {
-		case 1:
-			cntPrefab = fireballPrefab;
-			break;
-		case 2:
-			cntPrefab = frostballPrefab;
-			break;
-		case 3:
-			cntPrefab = thunderballPrefab;
-			break;
+	public void LoadSpells(FightData data) {
+		spellPossession = data.Player.Spells;
+	}
+
+	void OnGUI() {
+		if( spellPossession == null ) {
+			return;
+		}
+		
+		for( int i=0; i< spellPossession.Count; i++) {
+			SpellPossession it = spellPossession[i];
+			
+			string description = it.spell.name + " ( damage : " + it.spell.damage.ToString() + " )";
+			
+			GUI.Label( getRectWithTopOffset(spellListRect, i * 25), description);
 		}
 	}
 	
-	string GetSpellName(int spellNum) {
-		switch(spellNum) {
-			case 1:
-				return "Fireball";
-				break;
-			case 2:
-				return "Frostball";
-				break;
-			case 3:
-				return "Thunderball";
-				break;
-		}
+	private Rect getRectWithTopOffset(Rect rect, int offset) {
+		return new Rect(rect.left, rect.top + offset, rect.width, rect.height);
+	}
 
-		return "";
+	private void LoadSpellPrefabs() {
+		RetreiveDataScript script = FindObjectOfType(typeof( RetreiveDataScript )) as RetreiveDataScript;
+		prefabs = script.prefabs;
 	}
 }

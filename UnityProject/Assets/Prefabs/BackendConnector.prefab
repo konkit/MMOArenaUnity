@@ -38,23 +38,23 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 43c9dab854f56254481f109e1be0c152, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerID: 1
-  characterName: 
-  characterLevel: 0
-  characterExp: 0
-  items: 
+  player: {fileID: 0}
+  prefabs:
+  - {fileID: 100000, guid: 224c22ea3ac022b468fa3668819c7762, type: 2}
+  - {fileID: 100002, guid: 5d12edcf72914c04a9f7b1913cb0ff8e, type: 2}
+  - {fileID: 100000, guid: 9acfc229f0789344f99f8544ce874323, type: 2}
   retreiveDataButtonRect:
     serializedVersion: 2
-    x: 0
-    y: 0
-    width: 0
-    height: 0
+    x: 500
+    y: 100
+    width: 200
+    height: 50
   storeDataButtonRect:
     serializedVersion: 2
-    x: 0
-    y: 0
-    width: 0
-    height: 0
+    x: 500
+    y: 150
+    width: 200
+    height: 50
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1

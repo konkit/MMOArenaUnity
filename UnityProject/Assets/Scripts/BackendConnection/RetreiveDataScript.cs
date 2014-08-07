@@ -13,6 +13,9 @@ public class RetreiveDataScript : MonoBehaviour {
 	string actionName = "/requestFightData";
 
 	public GameObject player;
+
+
+	public GameObject[] prefabs;
 		
 	// Data from backend
 	public FightData fightData;
@@ -23,22 +26,12 @@ public class RetreiveDataScript : MonoBehaviour {
 	
 	// Use this for initialization
 	void Start () {
-	
+		StartCoroutine( Retreive() );
 	}
 	
 	// Update is called once per frame
 	void Update () {
 	
-	}
-	
-	void OnGUI() {
-		if( GUI.Button( retreiveDataButtonRect, "Retreive data from server") ) {
-			StartCoroutine( Retreive() );			
-		}
-
-		if( GUI.Button( storeDataButtonRect, "Send data back to server") ) {
-			StartCoroutine( SendFightResponse() );			
-		}
 	}
 	
 	IEnumerator Retreive() {	
@@ -59,7 +52,7 @@ public class RetreiveDataScript : MonoBehaviour {
 		stream.Close();
 
 		player.GetComponent<PlayerInventory>().LoadInventory(fightData);
-		player.GetComponent<PlayerSpells>().LoadSpells(fightData);
+		player.GetComponent<PlayerSpellcasting>().LoadSpells(fightData);
 
 		Debug.Log ("fightData item 1 name : " + fightData.Player.Items[0].item.name );
 	}
