@@ -3024,6 +3024,10 @@ Prefab:
       propertyPath: player
       value: 
       objectReference: {fileID: 306341454}
+    - target: {fileID: 11400000, guid: adfa7c31357a11848927d66da9a8e138, type: 2}
+      propertyPath: enemy
+      value: 
+      objectReference: {fileID: 868453171}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: adfa7c31357a11848927d66da9a8e138, type: 2}
   m_RootGameObject: {fileID: 1441629374}
@@ -8166,12 +8170,12 @@ GameObject:
   - 114: {fileID: 306341459}
   - 114: {fileID: 306341458}
   - 114: {fileID: 306341457}
-  - 114: {fileID: 306341456}
   - 114: {fileID: 306341463}
   - 135: {fileID: 306341464}
   - 114: {fileID: 306341465}
   - 114: {fileID: 306341466}
-  - 114: {fileID: 306341467}
+  - 114: {fileID: 306341468}
+  - 114: {fileID: 306341456}
   m_Layer: 0
   m_Name: MAX
   m_TagString: Player
@@ -8202,13 +8206,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 306341454}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5e3b7d37ccb08784b9a2db3b24b2b00e, type: 3}
+  m_Script: {fileID: 11500000, guid: f260f5a8e4be6f14f9130c1c5813df7a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  prefabs: []
-  currentSpellNum: 1
-  spellHeight: 1.39999998
-  currentCooldown: 0
 --- !u!114 &306341457
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8360,7 +8360,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8995cc08058feab42bd1a67a9a9f2389, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &306341467
+--- !u!114 &306341468
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
@@ -8368,15 +8368,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 306341454}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 99dc3facc9541cf43aa2ffa7984fdf9a, type: 3}
+  m_Script: {fileID: 11500000, guid: c9125e6cff1865040a1f4d9dd756dabb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  itemListRect:
-    serializedVersion: 2
-    x: 10
-    y: 100
-    width: 200
-    height: 20
+  prefabs: []
+  currentSpellNum: 1
+  spellHeight: 1.39999998
+  currentCooldown: 0
 --- !u!1 &320377155
 GameObject:
   m_ObjectHideFlags: 0
@@ -18567,6 +18565,7 @@ GameObject:
   - 114: {fileID: 868453176}
   - 114: {fileID: 868453180}
   - 114: {fileID: 868453179}
+  - 114: {fileID: 868453182}
   - 114: {fileID: 868453181}
   m_Layer: 0
   m_Name: Opponent
@@ -18725,13 +18724,24 @@ MonoBehaviour:
   m_GameObject: {fileID: 868453171}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5e3b7d37ccb08784b9a2db3b24b2b00e, type: 3}
+  m_Script: {fileID: 11500000, guid: c9125e6cff1865040a1f4d9dd756dabb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   prefabs: []
   currentSpellNum: 1
   spellHeight: 1.39999998
   currentCooldown: 0
+--- !u!114 &868453182
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 868453171}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f260f5a8e4be6f14f9130c1c5813df7a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &884782247
 GameObject:
   m_ObjectHideFlags: 0
@@ -38342,6 +38352,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 306341454}
+  enemy: {fileID: 868453171}
   prefabs:
   - {fileID: 100000, guid: 224c22ea3ac022b468fa3668819c7762, type: 2}
   - {fileID: 100002, guid: 5d12edcf72914c04a9f7b1913cb0ff8e, type: 2}

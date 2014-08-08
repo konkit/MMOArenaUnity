@@ -13,7 +13,7 @@ public class RetreiveDataScript : MonoBehaviour {
 	string actionName = "/requestFightData";
 
 	public GameObject player;
-
+	public GameObject enemy;
 
 	public GameObject[] prefabs;
 		
@@ -51,8 +51,11 @@ public class RetreiveDataScript : MonoBehaviour {
 		fightData = serializer.Deserialize(stream) as FightData;
 		stream.Close();
 
-		player.GetComponent<PlayerInventory>().LoadInventory(fightData);
-		player.GetComponent<PlayerSpellcasting>().LoadSpells(fightData);
+		player.GetComponent<CharacterInventory>().LoadInventory(fightData.Player);
+		player.GetComponent<CharacterSpellcasting>().LoadSpells(fightData.Player);
+
+		enemy.GetComponent<CharacterInventory>().LoadInventory(fightData.Enemy);
+		enemy.GetComponent<CharacterSpellcasting>().LoadSpells(fightData.Enemy);
 
 		Debug.Log ("fightData item 1 name : " + fightData.Player.Items[0].item.name );
 	}
