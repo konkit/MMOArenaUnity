@@ -5,8 +5,8 @@ public class AnimationController : MonoBehaviour
 {
     Animator anim;
     PlayerMovementController playerController;
-    HealthOfPlayer death;
     CapsuleCollider colliderr;
+	CharacterStats characterStats;
 
 	CharacterControlInterface characterControlInterface;
 
@@ -15,7 +15,7 @@ public class AnimationController : MonoBehaviour
     {
         anim = GetComponent<Animator>();
         playerController = GetComponent<PlayerMovementController>();
-        death = GetComponent<HealthOfPlayer>();
+        characterStats = GetComponent<CharacterStats>();
         colliderr = GetComponent<CapsuleCollider>();
 
 		characterControlInterface = GetComponent<CharacterControlInterface>();
@@ -49,9 +49,9 @@ public class AnimationController : MonoBehaviour
     }
     void DeathAnimation()
     {
-		if( death.isDeath )
+		if( characterStats.isDeath )
 		{
-            anim.SetBool("isDeath", death.isDeath);
+            anim.SetBool("isDeath", characterStats.isDeath);
             colliderr.enabled=false;
         }
     }

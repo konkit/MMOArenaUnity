@@ -25,6 +25,9 @@ public class Character {
 	[XmlElement("exp")]
 	public int Exp { get; set; }
 
+	[XmlElement("maxhealth")]
+	public int MaxHealth {get; set;}
+
 	[XmlElement("coins")]
 	public int Coins { get; set; }
 

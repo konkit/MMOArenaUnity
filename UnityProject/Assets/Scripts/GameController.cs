@@ -20,8 +20,8 @@ public class GameController : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 		// currently is redundant, but shows a way of thinking.
-		enemy.GetComponent<HealthOfPlayer>().deathDelegate += sendBackWinScore;
-		player.GetComponent<HealthOfPlayer>().deathDelegate += sendBackLoseScore;
+		enemy.GetComponent<CharacterStats>().deathDelegate += sendBackWinScore;
+		player.GetComponent<CharacterStats>().deathDelegate += sendBackLoseScore;
         windowRect = new Rect(Screen.width / 2 - width / 2, Screen.height / 2 - height / 2, width, height);
 	}
 	

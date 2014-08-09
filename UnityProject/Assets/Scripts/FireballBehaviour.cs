@@ -26,7 +26,7 @@ public class FireballBehaviour : MonoBehaviour {
 		Instantiate(explosion, transform.position, transform.rotation);
 
 		if( coll.gameObject.tag == "Player" || coll.gameObject.tag == "Enemy" ) {
-			coll.gameObject.GetComponent<HealthOfPlayer>().decreaseHealth(damage);
+			coll.gameObject.GetComponent<CharacterStats>().decreaseHealth(damage);
 		}
         
 		Destroy(gameObject);

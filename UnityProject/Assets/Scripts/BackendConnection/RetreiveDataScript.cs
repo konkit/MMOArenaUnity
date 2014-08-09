@@ -51,9 +51,11 @@ public class RetreiveDataScript : MonoBehaviour {
 		fightData = serializer.Deserialize(stream) as FightData;
 		stream.Close();
 
+		player.GetComponent<CharacterStats>().LoadFromData(fightData.Player);
 		player.GetComponent<CharacterInventory>().LoadInventory(fightData.Player);
 		player.GetComponent<CharacterSpellcasting>().LoadSpells(fightData.Player);
 
+		enemy.GetComponent<CharacterStats>().LoadFromData(fightData.Enemy);
 		enemy.GetComponent<CharacterInventory>().LoadInventory(fightData.Enemy);
 		enemy.GetComponent<CharacterSpellcasting>().LoadSpells(fightData.Enemy);
 
