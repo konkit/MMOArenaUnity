@@ -15,6 +15,14 @@ public class FightData {
 	public Character Enemy { get; set; }
 }
 
+public class FightResult {
+	[XmlElement("playerHealthRemained")]
+	public int playerHealthRemained { get; set; }
+
+	[XmlElement("enemyHealthRemained")]
+	public int enemyHealthRemained { get; set; }
+}
+
 public class Character {
 	[XmlElement("name")]
 	public string Name { get; set; }

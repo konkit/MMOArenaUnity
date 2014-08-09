@@ -11,6 +11,7 @@ public class RetreiveDataScript : MonoBehaviour {
 	string serverAddress = "http://localhost:8080/GrailsMMOArenaBackend";
 	string controllerName = "/fight";
 	string actionName = "/requestFightData";
+	string storeActionName = "/storeResults";
 
 	public GameObject player;
 	public GameObject enemy;
@@ -62,22 +63,30 @@ public class RetreiveDataScript : MonoBehaviour {
 		Debug.Log ("fightData item 1 name : " + fightData.Player.Items[0].item.name );
 	}
 
+	public void StoreFightResults() {
+		StartCoroutine(StoreFightResultsCoroutine() );
+	}
 
-	IEnumerator SendFightResponse() {
-		int gainedExp = 1;
-
-		string webaddress = serverAddress;
+	IEnumerator StoreFightResultsCoroutine() {
+		WWWForm form = new WWWForm();
 		
-		Debug.Log("web address = " + webaddress);
-
-		WWW www = new WWW(webaddress );
-		yield return www;
+		form.AddField( "playerHealthRemained", player.GetComponent<CharacterStats>().health );
+		form.AddField( "enemyHealthRemained", enemy.GetComponent<CharacterStats>().health );
 		
-		if( www.error != null) {
-			Debug.LogError(www.error);
-		} else {
-			Debug.Log("Response: " + www.text);
+		WWW resultDataWWW = new WWW( serverAddress + controllerName + storeActionName, form );
+		
+		// Wait until the download is done
+		yield return resultDataWWW;
+		
+		if(resultDataWWW.error != null) {
+			Debug.Log( "Error downloading: " + resultDataWWW.error );
+			return false;
 		}
+		
+		Debug.Log("Fight data sent successfully");
+		Debug.Log("Response from server : " + resultDataWWW.text);
+		
+		//JS redirect to fight status check
 	}
 
 }

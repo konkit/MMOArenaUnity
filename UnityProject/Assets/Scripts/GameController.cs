@@ -12,6 +12,8 @@ public class GameController : MonoBehaviour {
     private bool victory;
     private bool defeat;
 
+	public RetreiveDataScript retreiveDataScript;
+
     void Awake()
     {
         victory = false;
@@ -34,6 +36,8 @@ public class GameController : MonoBehaviour {
 		Debug.Log("This happens when enemy dies");
         victory = true;
 		//send data to backend
+
+		retreiveDataScript.StoreFightResults();
 	}
 
 	public void sendBackLoseScore() {
@@ -41,6 +45,7 @@ public class GameController : MonoBehaviour {
         defeat = true;
         
 		//send data to backend
+		retreiveDataScript.StoreFightResults();
 	}
 
     void OnGUI()
