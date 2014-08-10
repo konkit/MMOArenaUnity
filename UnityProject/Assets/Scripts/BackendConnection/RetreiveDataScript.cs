@@ -80,7 +80,7 @@ public class RetreiveDataScript : MonoBehaviour {
 		
 		if(resultDataWWW.error != null) {
 			Debug.Log( "Error downloading: " + resultDataWWW.error );
-			return false;
+			throw new UnityException("Error downloading: " + resultDataWWW.error );
 		}
 		
 		Debug.Log("Fight data sent successfully");
