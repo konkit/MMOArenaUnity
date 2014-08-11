@@ -34,6 +34,10 @@ public class GameController : MonoBehaviour {
 
 	public void sendBackWinScore() {
 		Debug.Log("This happens when enemy dies");
+
+        MouseController controller = GameObject.FindObjectOfType<MouseController>() as MouseController;
+        controller.Disable();
+
         victory = true;
 		//send data to backend
 
@@ -42,6 +46,10 @@ public class GameController : MonoBehaviour {
 
 	public void sendBackLoseScore() {
 		Debug.Log("This happens when player dies");
+
+        MouseController controller = GameObject.FindObjectOfType<MouseController>() as MouseController;
+        controller.Disable();
+
         defeat = true;
         
 		//send data to backend
@@ -65,13 +73,13 @@ public class GameController : MonoBehaviour {
     void DoMyWindowWin(int windowID)
     {
         GUI.Label(new Rect(75, 30, 570, 250), labels[0]);
-        MenuGame();
+        FightResultsWindow();
     }
 
     void DoMyWindowDefeat(int windowID)
     {
         GUI.Label(new Rect(90, 30, 570, 250), labels[1]);
-        MenuGame();
+        FightResultsWindow();
     }
 
     void MenuGame()
@@ -83,6 +91,19 @@ public class GameController : MonoBehaviour {
         if (GUI.Button(new Rect(260, 180, 200, 70), "Exit") || Input.GetKeyDown(KeyCode.Escape))
         {
             Application.Quit();
+        }
+    }
+
+    void FightResultsWindow()
+    {
+        if (retreiveDataScript.fightAwards != null)
+        {
+            GUI.Label(new Rect(100, 170, 200, 20), "Received exp : " + retreiveDataScript.fightAwards.expEarned.ToString());
+        }
+        
+        if (GUI.Button(new Rect(50, 210, 200, 70), "Go back") )
+        {
+            Application.ExternalCall("redirectAfterFight");
         }
     }
 }

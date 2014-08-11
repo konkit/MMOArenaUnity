@@ -2,7 +2,9 @@
 using System.Collections;
 
 public class MouseController : MonoBehaviour {
-	
+
+    bool isEnabled;
+
 	public float mouseSensX = 2f;
 	public float mouseSensY = 1f;
 	
@@ -25,17 +27,20 @@ public class MouseController : MonoBehaviour {
 	
 	// Use this for initialization
 	void Start () {
-		Screen.showCursor = false;
-		Screen.lockCursor = true;
+        Enable();
 	}
 	
 	void OnDestroy() {
-		Screen.showCursor = true;
-		Screen.lockCursor = false;
+        Disable();
 	}
 	
 	// Update is called once per frame
 	void Update () {
+        if (!isEnabled)
+        {
+            return;
+        }
+
 		Vector3 cntPos = Input.mousePosition;
 		Vector3 diffVec = new Vector3( Input.GetAxis("Mouse X") * mouseSensX, 
 									   -Input.GetAxis("Mouse Y") * mouseSensY, 
@@ -79,4 +84,20 @@ public class MouseController : MonoBehaviour {
 		Quaternion pitchQuaternion = Quaternion.AngleAxis(cntCameraPitch, new Vector3(1f, 0f, 0f) );		
 		return yawQuaternion * pitchQuaternion;
 	}
+
+    public void Disable()
+    {
+        isEnabled = false;
+
+        Screen.showCursor = true;
+        Screen.lockCursor = false;
+    }
+
+    public void Enable()
+    {
+        isEnabled = true;
+
+        Screen.showCursor = false;
+        Screen.lockCursor = true;
+    }
 }

@@ -20,10 +20,7 @@ public class RetreiveDataScript : MonoBehaviour {
 		
 	// Data from backend
 	public FightData fightData;
-
-	// Debug rectangles
-	public Rect retreiveDataButtonRect;
-	public Rect storeDataButtonRect;
+    public FightAwards fightAwards;
 	
 	// Use this for initialization
 	void Start () {
@@ -72,7 +69,8 @@ public class RetreiveDataScript : MonoBehaviour {
 		
 		form.AddField( "playerHealthRemained", player.GetComponent<CharacterStats>().health );
 		form.AddField( "enemyHealthRemained", enemy.GetComponent<CharacterStats>().health );
-		
+
+        Debug.Log("Store result address = " + serverAddress + controllerName + storeActionName);
 		WWW resultDataWWW = new WWW( serverAddress + controllerName + storeActionName, form );
 		
 		// Wait until the download is done
@@ -82,11 +80,11 @@ public class RetreiveDataScript : MonoBehaviour {
 			Debug.Log( "Error downloading: " + resultDataWWW.error );
 			throw new UnityException("Error downloading: " + resultDataWWW.error );
 		}
-		
-		Debug.Log("Fight data sent successfully");
-		Debug.Log("Response from server : " + resultDataWWW.text);
-		
-		//JS redirect to fight status check
+
+        var serializer = new XmlSerializer(typeof(FightAwards));
+        var stream = new MemoryStream(Encoding.ASCII.GetBytes(resultDataWWW.text));
+        fightAwards = serializer.Deserialize(stream) as FightAwards;
+        stream.Close();
 	}
 
 }

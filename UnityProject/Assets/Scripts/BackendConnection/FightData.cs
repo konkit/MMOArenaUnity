@@ -8,6 +8,9 @@ using System.Collections.Generic;
 
 [XmlRoot("fightData")]
 public class FightData {
+    [XmlElement("fightId")]
+    public int FightId { get; set; }
+
 	[XmlElement("player")]
 	public Character Player { get; set; }
 
@@ -21,6 +24,19 @@ public class FightResult {
 
 	[XmlElement("enemyHealthRemained")]
 	public int enemyHealthRemained { get; set; }
+}
+
+[XmlRoot("fightAwards")]
+public class FightAwards
+{
+    [XmlElement("error")]
+    public string errorString { get; set; }
+
+    [XmlElement("hasWon")]
+    public bool hasWon { get; set; }
+
+    [XmlElement("expEarned")]
+    public int expEarned { get; set; }
 }
 
 public class Character {
