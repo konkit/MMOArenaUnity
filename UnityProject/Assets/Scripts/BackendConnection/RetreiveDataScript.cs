@@ -7,39 +7,48 @@ using System.IO;
 using System.Text;
 
 public class RetreiveDataScript : MonoBehaviour {
+    // other scripts references
+    GameController gameController;
+
 	// server connection data
 	string serverAddress = "http://localhost:8080/GrailsMMOArenaBackend";
 	string controllerName = "/fight";
 	string actionName = "/requestFightData";
 	string storeActionName = "/storeResults";
 
+    // other objects references
 	public GameObject player;
 	public GameObject enemy;
-
 	public GameObject[] prefabs;
 		
-	// Data from backend
+	// Data received at the beginning of the fight
 	public FightData fightData;
+
+    // Data received after the fight
     public FightAwards fightAwards;
 	
 	// Use this for initialization
 	void Start () {
-		StartCoroutine( Retreive() );
+        gameController = GetComponent<GameController>();
 	}
 	
 	// Update is called once per frame
 	void Update () {
 	
 	}
+
+    public void RetreiveFightData() {
+        StartCoroutine(Retreive());
+    }
 	
 	IEnumerator Retreive() {	
 		string webaddress = serverAddress + controllerName + actionName;
-
 		WWW www = new WWW(webaddress );
 		yield return www;
 		
 		if( www.error != null) {
-			Debug.LogError(www.error);
+            gameController.StartFailed(www.error);
+            throw new UnityException("Retreive FightData error");
 		}
 		
 		string responseData = www.text;		
@@ -57,7 +66,7 @@ public class RetreiveDataScript : MonoBehaviour {
 		enemy.GetComponent<CharacterInventory>().LoadInventory(fightData.Enemy);
 		enemy.GetComponent<CharacterSpellcasting>().LoadSpells(fightData.Enemy);
 
-		Debug.Log ("fightData item 1 name : " + fightData.Player.Items[0].item.name );
+        gameController.StartSuccessful();
 	}
 
 	public void StoreFightResults() {
@@ -77,14 +86,15 @@ public class RetreiveDataScript : MonoBehaviour {
 		yield return resultDataWWW;
 		
 		if(resultDataWWW.error != null) {
-			Debug.Log( "Error downloading: " + resultDataWWW.error );
-			throw new UnityException("Error downloading: " + resultDataWWW.error );
+            gameController.ResultSendFailed(resultDataWWW.error);
 		}
 
         var serializer = new XmlSerializer(typeof(FightAwards));
         var stream = new MemoryStream(Encoding.ASCII.GetBytes(resultDataWWW.text));
         fightAwards = serializer.Deserialize(stream) as FightAwards;
         stream.Close();
+
+        gameController.ResultSendSuccessful();
 	}
 
 }
