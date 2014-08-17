@@ -37,7 +37,6 @@ public class CharacterGuiDisplayer : MonoBehaviour {
 
         windowRect = new Rect(Screen.width / 2 - width / 2, Screen.height / 2 - height / 2, width, height);
 
-
 		if( playerStats == null || enemyStats == null ) {
 			throw new UnityException("Character stats not set up");
 		}
@@ -76,13 +75,12 @@ public class CharacterGuiDisplayer : MonoBehaviour {
 
     void OnGUI_Starting()
     {
-        DisplayPleaseWait();
+        windowRect = GUI.Window(0, windowRect, DisplayPleaseWait, "");
     }
 
     void OnGUI_StartFail()
     {
-        DisplayError();
-        DisplayGoBackButton();
+        windowRect = GUI.Window(0, windowRect, DisplayError, "");
     }
 
     void OnGUI_Ongoing()
@@ -94,13 +92,12 @@ public class CharacterGuiDisplayer : MonoBehaviour {
 
     void OnGUI_SendingResult()
     {
-        DisplayPleaseWait();
+        windowRect = GUI.Window(0, windowRect, DisplayPleaseWait, "");
     }
 
     void OnGUI_SendingResultFail()
     {
-        DisplayError();
-        DisplayGoBackButton();
+        windowRect = GUI.Window(0, windowRect, DisplayError, "");
     }
 
     void OnGUI_Finished()
@@ -117,12 +114,13 @@ public class CharacterGuiDisplayer : MonoBehaviour {
         }
     }
 
-    void DisplayError()
+    void DisplayError(int windowID)
     {
         GUI.Label(new Rect(75, 30, 570, 250), "An error occured : " + gameController.errorMsg);
+        DisplayGoBackButton();
     }
 
-    void DisplayPleaseWait()
+    void DisplayPleaseWait(int windowID)
     {
         GUI.Label(new Rect(75, 30, 570, 250), "Please wait");
     }
@@ -195,10 +193,7 @@ public class CharacterGuiDisplayer : MonoBehaviour {
 		baseTxPlayer = healthbarbaseTexture;
 		greenTxPlayer = healthbargreenTexture;
 		yellowTxPlayer = healthbaryellowTexture;
-		redTxPlayer = healthbarredTexture;
-		
-		//renderer.material.SetTextureScale("baseTxPlayer", new Vector2(1,-1));
-		
+		redTxPlayer = healthbarredTexture;		
 		
 		baseTxEnemy = healthbarbaseTexture;
 		greenTxEnemy = healthbargreenTexture;
@@ -216,18 +211,6 @@ public class CharacterGuiDisplayer : MonoBehaviour {
     {
         GUI.Label(new Rect(90, 30, 570, 250), labels[1]);
         FightResultsWindow();
-    }
-
-    void MenuGame()
-    {
-        if (GUI.Button(new Rect(50, 180, 200, 70), "Restart") || Input.GetKeyDown(KeyCode.P))
-        {
-            Application.LoadLevel(Application.loadedLevel);
-        }
-        if (GUI.Button(new Rect(260, 180, 200, 70), "Exit") || Input.GetKeyDown(KeyCode.Escape))
-        {
-            Application.Quit();
-        }
     }
 
     void FightResultsWindow()

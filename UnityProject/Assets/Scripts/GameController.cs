@@ -19,6 +19,8 @@ public class GameController : MonoBehaviour {
     public bool victory;
     public bool defeat;
 
+    public bool isPaused = false;
+
 	public RetreiveDataScript retreiveDataScript;
 
     public GameState gameState;
@@ -33,21 +35,23 @@ public class GameController : MonoBehaviour {
     }
 
 	void Start () {
-		// currently is redundant, but shows a way of thinking.
 		enemy.GetComponent<CharacterStats>().deathDelegate += sendBackWinScore;
 		player.GetComponent<CharacterStats>().deathDelegate += sendBackLoseScore;
 
         retreiveDataScript.RetreiveFightData();
+
+        Pause();
 	}
 	
 	// Update is called once per frame
 	void Update () {
-        if (gameState == GameState.STARTING)
+        if (isPaused)
         {
-            if (retreiveDataScript.fightData != null)
-            {
-                gameState = GameState.ONGOING;
-            }
+            Time.timeScale = 0;
+        }
+        else
+        {
+            Time.timeScale = 1;
         }
 	}
 
@@ -55,12 +59,16 @@ public class GameController : MonoBehaviour {
     {
         MouseController controller = GameObject.FindObjectOfType<MouseController>() as MouseController;
         controller.Disable();
+
+        isPaused = true;
     }
 
     public void UnPause()
     {
         MouseController controller = GameObject.FindObjectOfType<MouseController>() as MouseController;
-        controller.Disable();
+        controller.Enable();
+
+        isPaused = false;
     }
 
 	public void sendBackWinScore() {
@@ -90,6 +98,7 @@ public class GameController : MonoBehaviour {
 
     public void StartSuccessful()
     {
+        UnPause();
         gameState = GameState.ONGOING;
     }
 
