@@ -24,20 +24,19 @@ public class NodeJsSocketConnector : MonoBehaviour {
     public int fightId;
     public int playerId;
 
+    public int frameDivisor = 10;
+    int cntFrame = 0;
+
     GameController gameController;
     public CommunicationState communicationState = CommunicationState.NOT_READY;
 
     TcpClient client = null;
     NetworkStream stream = null;
 
-    // Client socket.
-    public Socket socket = null;
     // Size of receive buffer.
     public const int BufferSize = 256;
     // Receive buffer.
     public byte[] buffer = new byte[BufferSize];
-    // Received data string.
-    public StringBuilder sb = new StringBuilder();
 
     public static String response = String.Empty;
 
@@ -51,45 +50,59 @@ public class NodeJsSocketConnector : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
+        if (cntFrame < frameDivisor)
+        {
+            cntFrame++;
+            return;
+        }
+
+        cntFrame = 0;
         if (communicationState != CommunicationState.NOT_READY)
         {
             // send data to node.js
 
-            float posX = gameController.player.transform.position.x;
-            float posY = gameController.player.transform.position.y;
-            float posZ = gameController.player.transform.position.z;
+            if (communicationState == CommunicationState.READY)
+            {
+                float posX = gameController.player.transform.position.x;
+                float posY = gameController.player.transform.position.y;
+                float posZ = gameController.player.transform.position.z;
 
-            String message = "{ "
-                + "\"fightId\": " + fightId 
-                + ", \"playerId\": " + playerId 
-                + ", \"posX\": " + posX 
-                + ", \"posY\": " + posY 
-                + ", \"posZ\": " + posZ 
-                +"}";
+                String message = "{ "
+                    + "\"fightId\": " + fightId
+                    + ", \"playerId\": " + playerId
+                    + ", \"posX\": " + posX
+                    + ", \"posY\": " + posY
+                    + ", \"posZ\": " + posZ
+                    + "}";
 
-            communicationState = CommunicationState.SENDING;
+                communicationState = CommunicationState.SENDING;
 
-            // Send test data to the remote device.
-            Send(message);
+                // Send test data to the remote device.
+                Send(message);
 
-            communicationState = CommunicationState.SENT;
+                communicationState = CommunicationState.SENT;
+            }
+            else if (communicationState == CommunicationState.SENT)
+            {
+                communicationState = CommunicationState.RECEIVING;
 
-            communicationState = CommunicationState.RECEIVING;
+                // Receive the response from the remote device.
+                response = Receive();
 
-            // Receive the response from the remote device.
-            response = Receive();
+                communicationState = CommunicationState.RECEIVED;
+            }
+            else if (communicationState == CommunicationState.RECEIVED)
+            {
+                var responseObj = SimpleJSON.JSON.Parse(response);
 
-            communicationState = CommunicationState.RECEIVED;
+                gameController.enemy.transform.position = new Vector3(
+                    responseObj["enemy"]["x"].AsFloat,
+                    responseObj["enemy"]["y"].AsFloat,
+                    responseObj["enemy"]["z"].AsFloat
+                );
 
-            var responseObj = SimpleJSON.JSON.Parse(response);
-
-            gameController.enemy.transform.position = new Vector3(
-                responseObj["enemy"]["x"].AsFloat,
-                responseObj["enemy"]["y"].AsFloat,
-                responseObj["enemy"]["z"].AsFloat
-            );
-
-            communicationState = CommunicationState.READY;
+                communicationState = CommunicationState.READY;
+            }
         }
 	}
 
@@ -152,26 +165,10 @@ public class NodeJsSocketConnector : MonoBehaviour {
         return responseData;
     }
 
-
-
-
     void onDestroy() {
-
-
-        // Release the socket.
-        //socket.Shutdown(SocketShutdown.Both);
-        //socket.Close();
+        stream.Close();
+        client.Close();
     }
 }
 
-public class StateObject
-{
-    // Client socket.
-    public Socket workSocket = null;
-    // Size of receive buffer.
-    public const int BufferSize = 256;
-    // Receive buffer.
-    public byte[] buffer = new byte[BufferSize];
-    // Received data string.
-    public StringBuilder sb = new StringBuilder();
-}
+

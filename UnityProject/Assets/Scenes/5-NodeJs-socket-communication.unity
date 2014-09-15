@@ -18517,7 +18517,7 @@ MonoBehaviour:
     type: 2}
   m_PrefabInternal: {fileID: 1821101977}
   m_GameObject: {fileID: 868453171}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 67862d7f4051e954b91bb06de6dbf206, type: 3}
   m_Name: 
@@ -50210,6 +50210,10 @@ Prefab:
       propertyPath: playerObject
       value: 
       objectReference: {fileID: 306341454}
+    - target: {fileID: 11400002, guid: e854eb322803d8c4c9fcc5b4fb5c2748, type: 2}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: e854eb322803d8c4c9fcc5b4fb5c2748, type: 2}
   m_RootGameObject: {fileID: 868453171}
@@ -50759,11 +50763,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2330faa8ba95a7c459790a499cb28692, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  host: localhost
+  host: 107.155.108.250
   port: 5000
   fightId: 1
   playerId: 1
-  isConnected: 0
+  frameDivisor: 5
+  communicationState: 0
   buffer: 
 --- !u!114 &1948036980
 MonoBehaviour:
