@@ -6,6 +6,16 @@ using System;
 using System.Text;
 using System.Threading;
 
+public enum CommunicationState
+{
+    NOT_READY,
+    READY,
+    SENDING,
+    SENT,
+    RECEIVING,
+    RECEIVED
+}
+
 public class NodeJsSocketConnector : MonoBehaviour {
 
     public string host;
@@ -14,9 +24,8 @@ public class NodeJsSocketConnector : MonoBehaviour {
     public int fightId;
     public int playerId;
 
-    public bool isConnected;
-
     GameController gameController;
+    public CommunicationState communicationState = CommunicationState.NOT_READY;
 
     TcpClient client = null;
     NetworkStream stream = null;
@@ -32,17 +41,9 @@ public class NodeJsSocketConnector : MonoBehaviour {
 
     public static String response = String.Empty;
 
-    // ManualResetEvent instances signal completion.
-    private static ManualResetEvent connectDone =
-        new ManualResetEvent(false);
-    private static ManualResetEvent sendDone =
-        new ManualResetEvent(false);
-    private static ManualResetEvent receiveDone =
-        new ManualResetEvent(false);
-
 	// Use this for initialization
 	void Start () {
-        isConnected = false;
+        communicationState = CommunicationState.NOT_READY;
 
         gameController = GetComponent<GameController>();
         gameController.Pause();
@@ -50,10 +51,8 @@ public class NodeJsSocketConnector : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-        if (isConnected)
+        if (communicationState != CommunicationState.NOT_READY)
         {
-            
-
             // send data to node.js
 
             float posX = gameController.player.transform.position.x;
@@ -68,13 +67,19 @@ public class NodeJsSocketConnector : MonoBehaviour {
                 + ", \"posZ\": " + posZ 
                 +"}";
 
+            communicationState = CommunicationState.SENDING;
+
             // Send test data to the remote device.
             Send(message);
-            //sendDone.WaitOne();
+
+            communicationState = CommunicationState.SENT;
+
+            communicationState = CommunicationState.RECEIVING;
 
             // Receive the response from the remote device.
             response = Receive();
-            //receiveDone.WaitOne();
+
+            communicationState = CommunicationState.RECEIVED;
 
             var responseObj = SimpleJSON.JSON.Parse(response);
 
@@ -84,12 +89,13 @@ public class NodeJsSocketConnector : MonoBehaviour {
                 responseObj["enemy"]["z"].AsFloat
             );
 
+            communicationState = CommunicationState.READY;
         }
 	}
 
     void OnGUI()
     {
-        if (!isConnected)
+        if (communicationState == CommunicationState.NOT_READY)
         {
             string tmp = "";
 
@@ -113,8 +119,6 @@ public class NodeJsSocketConnector : MonoBehaviour {
                 doConnect();
             }
         }
-
-        
     }
 
     void doConnect()
@@ -122,7 +126,7 @@ public class NodeJsSocketConnector : MonoBehaviour {
         TcpClient client = new TcpClient(host, port);
         stream = client.GetStream();
 
-        isConnected = true;
+        communicationState = CommunicationState.READY;
         gameController.UnPause();
     }
 
