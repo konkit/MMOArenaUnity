@@ -14,7 +14,7 @@ public enum CommunicationState
     SENT,
     RECEIVING,
     RECEIVED
-}
+};
 
 public class NodeJsSocketConnector : MonoBehaviour {
 
@@ -24,91 +24,77 @@ public class NodeJsSocketConnector : MonoBehaviour {
     public int fightId;
     public int playerId;
 
-    public int frameDivisor = 10;
     int cntFrame = 0;
 
     GameController gameController;
-    public CommunicationState communicationState = CommunicationState.NOT_READY;
 
-    TcpClient client = null;
-    NetworkStream stream = null;
+    SocketThreadManager socketThreadManager = new SocketThreadManager();
 
     // Size of receive buffer.
     public const int BufferSize = 256;
     // Receive buffer.
     public byte[] buffer = new byte[BufferSize];
 
-    public static String response = String.Empty;
+    public int divisionRate = 10;
+    int counter = 0;
 
 	// Use this for initialization
 	void Start () {
-        communicationState = CommunicationState.NOT_READY;
-
         gameController = GetComponent<GameController>();
         gameController.Pause();
 	}
 	
 	// Update is called once per frame
 	void Update () {
-        if (cntFrame < frameDivisor)
+        if (counter < divisionRate)
         {
-            cntFrame++;
+            counter++;
             return;
         }
+        counter = 0;
 
-        cntFrame = 0;
-        if (communicationState != CommunicationState.NOT_READY)
+        if (socketThreadManager.communicationState != CommunicationState.NOT_READY)
         {
-            // send data to node.js
-
-            if (communicationState == CommunicationState.READY)
-            {
-                float posX = gameController.player.transform.position.x;
-                float posY = gameController.player.transform.position.y;
-                float posZ = gameController.player.transform.position.z;
-
-                String message = "{ "
-                    + "\"fightId\": " + fightId
-                    + ", \"playerId\": " + playerId
-                    + ", \"posX\": " + posX
-                    + ", \"posY\": " + posY
-                    + ", \"posZ\": " + posZ
-                    + "}";
-
-                communicationState = CommunicationState.SENDING;
-
-                // Send test data to the remote device.
-                Send(message);
-
-                communicationState = CommunicationState.SENT;
-            }
-            else if (communicationState == CommunicationState.SENT)
-            {
-                communicationState = CommunicationState.RECEIVING;
-
-                // Receive the response from the remote device.
-                response = Receive();
-
-                communicationState = CommunicationState.RECEIVED;
-            }
-            else if (communicationState == CommunicationState.RECEIVED)
-            {
-                var responseObj = SimpleJSON.JSON.Parse(response);
-
-                gameController.enemy.transform.position = new Vector3(
-                    responseObj["enemy"]["x"].AsFloat,
-                    responseObj["enemy"]["y"].AsFloat,
-                    responseObj["enemy"]["z"].AsFloat
-                );
-
-                communicationState = CommunicationState.READY;
-            }
+            processData();    
         }
+
+        Debug.Log("End of this function");
 	}
+
+    void processData()
+    {
+        float posX = gameController.player.transform.position.x;
+        float posY = gameController.player.transform.position.y;
+        float posZ = gameController.player.transform.position.z;
+
+        socketThreadManager.message = "{ "
+            + "\"fightId\": " + fightId
+            + ", \"playerId\": " + playerId
+            + ", \"posX\": " + posX
+            + ", \"posY\": " + posY
+            + ", \"posZ\": " + posZ
+            + "}";
+
+        Debug.Log("Message : " + socketThreadManager.message);
+
+        String response = socketThreadManager.response;
+        if (response != null)
+        {
+            Debug.Log("Response : " + response);
+
+            var responseObj = SimpleJSON.JSON.Parse(socketThreadManager.response);
+
+            gameController.enemy.transform.position = new Vector3(
+                responseObj["enemy"]["x"].AsFloat,
+                responseObj["enemy"]["y"].AsFloat,
+                responseObj["enemy"]["z"].AsFloat
+            );
+        }
+    }
 
     void OnGUI()
     {
-        if (communicationState == CommunicationState.NOT_READY)
+        if (socketThreadManager.communicationState == CommunicationState.NOT_READY)
         {
             string tmp = "";
 
@@ -129,24 +115,77 @@ public class NodeJsSocketConnector : MonoBehaviour {
 
             if (GUI.Button(new Rect(100, 150, 100, 30), "Connect"))
             {
-                doConnect();
+                Debug.Log("Connecting");
+
+                socketThreadManager.doConnect(host, port);
+                gameController.UnPause();
+
+                Debug.Log("Connected");
             }
         }
     }
 
-    void doConnect()
+    
+
+    void onDestroy() {
+        socketThreadManager.Destroy();
+        
+    }
+}
+
+public class SocketThreadManager
+{
+    TcpClient client = null;
+    NetworkStream stream = null;
+
+    public CommunicationState communicationState = CommunicationState.NOT_READY;
+
+    String messageString = null; // input message
+
+    String responseString = null;
+
+    Thread thread;
+
+    bool shouldRun = true;
+
+    void Process() {
+        while (shouldRun)
+        {
+            if (message == null)
+            {
+                continue;
+            }
+            // Send test data to the remote device.
+
+            Send(message);
+
+            response = Receive();
+
+            Thread.Sleep(500);
+        }
+    }
+
+    
+
+    public void doConnect(String host, int port)
     {
         TcpClient client = new TcpClient(host, port);
         stream = client.GetStream();
 
         communicationState = CommunicationState.READY;
-        gameController.UnPause();
+
+        Debug.Log("Starting thread");
+
+        thread = new Thread(Process);
+        thread.Start();
+
+        Debug.Log("Thread started");
     }
 
     void Send(String message)
     {
-        Byte[] data = System.Text.Encoding.ASCII.GetBytes(message);   
- 
+        Byte[] data = System.Text.Encoding.ASCII.GetBytes(message);
+
         stream.Write(data, 0, data.Length);
     }
 
@@ -165,9 +204,36 @@ public class NodeJsSocketConnector : MonoBehaviour {
         return responseData;
     }
 
-    void onDestroy() {
+    public void Destroy()
+    {
+        shouldRun = false;
+
         stream.Close();
         client.Close();
+    }
+
+    public String message
+    {
+        get
+        {
+            return messageString;
+        }
+        set
+        {
+            messageString = value;
+        }
+    }
+
+    public String response
+    {
+        get
+        {
+            return responseString;
+        }
+        set
+        {
+            responseString = value;
+        }
     }
 }
 
