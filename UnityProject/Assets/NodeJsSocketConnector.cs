@@ -66,6 +66,7 @@ public class NodeJsSocketConnector : MonoBehaviour {
         float posX = gameController.player.transform.position.x;
         float posY = gameController.player.transform.position.y;
         float posZ = gameController.player.transform.position.z;
+        float yaw = gameController.player.transform.rotation.eulerAngles.y;
 
         socketThreadManager.message = "{ "
             + "\"fightId\": " + fightId
@@ -73,6 +74,7 @@ public class NodeJsSocketConnector : MonoBehaviour {
             + ", \"posX\": " + posX
             + ", \"posY\": " + posY
             + ", \"posZ\": " + posZ
+            + ", \"yaw\": " + yaw
             + "}";
 
         Debug.Log("Message : " + socketThreadManager.message);
@@ -89,6 +91,7 @@ public class NodeJsSocketConnector : MonoBehaviour {
                 responseObj["enemy"]["y"].AsFloat,
                 responseObj["enemy"]["z"].AsFloat
             );
+            gameController.enemy.transform.eulerAngles = new Vector3(0.0f, responseObj["enemy"]["yaw"].AsFloat, 0.0f);
         }
     }
 
