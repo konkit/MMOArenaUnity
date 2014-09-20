@@ -153,9 +153,13 @@ public class NodeJsSocketConnector : MonoBehaviour {
 
     
 
-    void onDestroy() {
+    void OnDestroy() {
         socketThreadManager.Destroy();
-        
+    }
+
+    void OnApplicationQuit()
+    {
+
     }
 
     
@@ -272,10 +276,18 @@ public class SocketThreadManager
 
     public void Destroy()
     {
+        Debug.Log("Destroying thread");
+
         shouldRun = false;
 
-        stream.Close();
-        client.Close();
+        if (stream != null)
+        {
+            stream.Close();
+        }
+        if (client != null)
+        {
+            client.Close();
+        }        
     }
 
 
