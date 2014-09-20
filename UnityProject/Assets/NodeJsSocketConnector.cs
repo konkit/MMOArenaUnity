@@ -109,7 +109,7 @@ public class NodeJsSocketConnector : MonoBehaviour {
             );
             gameController.enemy.transform.eulerAngles = new Vector3(0.0f, responseObj["enemy"]["yaw"].AsFloat, 0.0f);
 
-            if (gameController.gameState == GameState.STARTING)
+            if (gameController.gameState == GameState.CONNECTING_VIA_TCP)
             {
                 gameController.SocketConnectSuccess();
             }
