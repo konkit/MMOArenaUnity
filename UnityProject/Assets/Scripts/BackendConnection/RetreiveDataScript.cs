@@ -11,7 +11,7 @@ public class RetreiveDataScript : MonoBehaviour {
     GameController gameController;
 
 	// server connection data
-	string serverAddress = "http://localhost:8080/GrailsMMOArenaBackend";
+	public string serverAddress = "http://localhost:8080/GrailsMMOArena";
 	string controllerName = "/fight";
 	string actionName = "/requestFightData";
 	string storeActionName = "/storeResults";
@@ -28,7 +28,7 @@ public class RetreiveDataScript : MonoBehaviour {
     public FightAwards fightAwards;
 	
 	// Use this for initialization
-	void Start () {
+	void Awake () {
         gameController = GetComponent<GameController>();
 	}
 	
@@ -41,32 +41,40 @@ public class RetreiveDataScript : MonoBehaviour {
         StartCoroutine(Retreive());
     }
 	
-	IEnumerator Retreive() {	
-		string webaddress = serverAddress + controllerName + actionName;
-		WWW www = new WWW(webaddress );
-		yield return www;
+	IEnumerator Retreive() {
+        string webaddress = serverAddress + controllerName + actionName;
+
+        Debug.Log("Request sent to : " + webaddress);
+
+        WWW www = new WWW(webaddress );
+        yield return www;
 		
-		if( www.error != null) {
-            gameController.StartFailed(www.error);
-            throw new UnityException("Retreive FightData error");
-		}
+        
+        if( www.error != null) {
+            gameController.BackendConnectFailed(www.error);
+            throw new UnityException("Retreive FightData error : " + www.error);
+        }
 		
-		string responseData = www.text;		
+        string responseData = www.text;
 
-		var serializer = new XmlSerializer(typeof(FightData));
-		var stream = new MemoryStream( Encoding.ASCII.GetBytes(responseData));
-		fightData = serializer.Deserialize(stream) as FightData;
-		stream.Close();
+        Debug.Log("Response data : " + responseData);
 
-		player.GetComponent<CharacterStats>().LoadFromData(fightData.Player);
-		player.GetComponent<CharacterInventory>().LoadInventory(fightData.Player);
-		player.GetComponent<CharacterSpellcasting>().LoadSpells(fightData.Player);
+        var serializer = new XmlSerializer(typeof(FightData));
+        var stream = new MemoryStream( Encoding.ASCII.GetBytes(responseData));
+        fightData = serializer.Deserialize(stream) as FightData;
+        stream.Close();
 
-		enemy.GetComponent<CharacterStats>().LoadFromData(fightData.Enemy);
-		enemy.GetComponent<CharacterInventory>().LoadInventory(fightData.Enemy);
-		enemy.GetComponent<CharacterSpellcasting>().LoadSpells(fightData.Enemy);
+        player.GetComponent<CharacterStats>().LoadFromData(fightData.Player);
+        player.GetComponent<CharacterInventory>().LoadInventory(fightData.Player);
+        player.GetComponent<CharacterSpellcasting>().LoadSpells(fightData.Player);
 
-        gameController.StartSuccessful();
+        enemy.GetComponent<CharacterStats>().LoadFromData(fightData.Enemy);
+        enemy.GetComponent<CharacterInventory>().LoadInventory(fightData.Enemy);
+        enemy.GetComponent<CharacterSpellcasting>().LoadSpells(fightData.Enemy);
+
+        Debug.Log("Response fight data : " + fightData.FightId);
+
+        gameController.BackendConnectSuccess();
 	}
 
 	public void StoreFightResults() {

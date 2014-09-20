@@ -4,6 +4,7 @@ using System.Collections;
 public enum GameState
 {
     STARTING, 
+    CONNECTING_VIA_TCP,
     START_FAILED, 
     ONGOING, 
     SENDING_RESULT, 
@@ -22,6 +23,7 @@ public class GameController : MonoBehaviour {
     public bool isPaused = false;
 
 	public RetreiveDataScript retreiveDataScript;
+    public NodeJsSocketConnector nodeJsSocketConnector;
 
     public GameState gameState;
 
@@ -29,6 +31,8 @@ public class GameController : MonoBehaviour {
 
     void Awake()
     {
+        nodeJsSocketConnector = GetComponent<NodeJsSocketConnector>();
+
         gameState = GameState.STARTING;
         victory = false;
         defeat = false;
@@ -76,7 +80,6 @@ public class GameController : MonoBehaviour {
 
         victory = true;
 		//send data to backend
-
 		retreiveDataScript.StoreFightResults();
 	}
 
@@ -90,13 +93,35 @@ public class GameController : MonoBehaviour {
 	}
 
 
-    public void StartFailed(string errorMsg)
+    public void BackendConnectFailed(string errorMsg)
     {
+        Debug.LogError("Backend connection failed");
+
         this.errorMsg = errorMsg;
         gameState = GameState.START_FAILED;
     }
 
-    public void StartSuccessful()
+    public void BackendConnectSuccess()
+    {
+        Debug.Log("Connected to backend successfully, connecting to TCP server");
+
+        Debug.Log("Fight data : " + retreiveDataScript.fightData );
+
+        nodeJsSocketConnector.fightId = retreiveDataScript.fightData.FightId;
+        nodeJsSocketConnector.playerId = retreiveDataScript.fightData.Player.Id;
+
+        gameState = GameState.CONNECTING_VIA_TCP;
+    }
+
+    public void SocketConnectFailed(string errorMsg)
+    {
+        Debug.LogError("Socket connection failed");
+
+        this.errorMsg = errorMsg;
+        gameState = GameState.START_FAILED;
+    }
+
+    public void SocketConnectSuccess()
     {
         UnPause();
         gameState = GameState.ONGOING;
@@ -112,4 +137,6 @@ public class GameController : MonoBehaviour {
         this.errorMsg = errorMsg;
         gameState = GameState.SENDING_RESULT_FAILED;
     }
+
+
 }

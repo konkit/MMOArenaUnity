@@ -40,6 +40,9 @@ public class FightAwards
 }
 
 public class Character {
+    [XmlAttribute("id")]
+    public int Id { get; set; }
+
 	[XmlElement("name")]
 	public string Name { get; set; }
 
