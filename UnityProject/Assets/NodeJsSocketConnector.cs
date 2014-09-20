@@ -31,12 +31,17 @@ public class NodeJsSocketConnector : MonoBehaviour {
     SocketThreadManager socketThreadManager = new SocketThreadManager();
 
     // Size of receive buffer.
-    public const int BufferSize = 256;
+    public const int BufferSize = 1024;
     // Receive buffer.
     public byte[] buffer = new byte[BufferSize];
 
+    String bufferString = "";
+    int packetSize = 0;
+
     public int divisionRate = 10;
     int counter = 0;
+
+    String errorMsg = "";
 
 	// Use this for initialization
 	void Start () {
@@ -53,12 +58,17 @@ public class NodeJsSocketConnector : MonoBehaviour {
         }
         counter = 0;
 
+
+
         if (socketThreadManager.communicationState != CommunicationState.NOT_READY)
         {
-            processData();    
+            processData();
         }
-
-        Debug.Log("End of this function");
+        else if (gameController.gameState == GameState.CONNECTING_VIA_TCP)
+        {
+            Debug.Log("Connecting to tcp");
+            socketThreadManager.doConnect(host, port);
+        }
 	}
 
     void processData()
@@ -80,9 +90,15 @@ public class NodeJsSocketConnector : MonoBehaviour {
         Debug.Log("Message : " + socketThreadManager.message);
 
         String response = socketThreadManager.response;
-        if (response != null)
+        if (response != null && response != "")
         {
-            Debug.Log("Response : " + response);
+            Debug.Log("Substracted JSON : " + response);
+
+            if (response.Substring(0, 5) == "ERROR")
+            {
+                errorMsg = response;
+                return;
+            }
 
             var responseObj = SimpleJSON.JSON.Parse(socketThreadManager.response);
 
@@ -92,11 +108,17 @@ public class NodeJsSocketConnector : MonoBehaviour {
                 responseObj["enemy"]["z"].AsFloat
             );
             gameController.enemy.transform.eulerAngles = new Vector3(0.0f, responseObj["enemy"]["yaw"].AsFloat, 0.0f);
+
+            if (gameController.gameState == GameState.STARTING)
+            {
+                gameController.SocketConnectSuccess();
+            }
         }
     }
 
     void OnGUI()
     {
+        /*
         if (socketThreadManager.communicationState == CommunicationState.NOT_READY)
         {
             string tmp = "";
@@ -126,6 +148,7 @@ public class NodeJsSocketConnector : MonoBehaviour {
                 Debug.Log("Connected");
             }
         }
+        */
     }
 
     
@@ -134,6 +157,8 @@ public class NodeJsSocketConnector : MonoBehaviour {
         socketThreadManager.Destroy();
         
     }
+
+    
 }
 
 public class SocketThreadManager
@@ -144,76 +169,13 @@ public class SocketThreadManager
     public CommunicationState communicationState = CommunicationState.NOT_READY;
 
     String messageString = null; // input message
-
     String responseString = null;
-
     Thread thread;
 
     bool shouldRun = true;
 
-    void Process() {
-        while (shouldRun)
-        {
-            if (message == null)
-            {
-                continue;
-            }
-            // Send test data to the remote device.
-
-            Send(message);
-
-            response = Receive();
-
-            Thread.Sleep(500);
-        }
-    }
-
-    
-
-    public void doConnect(String host, int port)
-    {
-        TcpClient client = new TcpClient(host, port);
-        stream = client.GetStream();
-
-        communicationState = CommunicationState.READY;
-
-        Debug.Log("Starting thread");
-
-        thread = new Thread(Process);
-        thread.Start();
-
-        Debug.Log("Thread started");
-    }
-
-    void Send(String message)
-    {
-        Byte[] data = System.Text.Encoding.ASCII.GetBytes(message);
-
-        stream.Write(data, 0, data.Length);
-    }
-
-    String Receive()
-    {
-        // Buffer to store the response bytes.
-        Byte[] data = new Byte[1024];
-
-        // String to store the response ASCII representation.
-        String responseData = String.Empty;
-
-        // Read the first batch of the TcpServer response bytes.
-        Int32 bytes = stream.Read(data, 0, data.Length);
-        responseData = System.Text.Encoding.ASCII.GetString(data, 0, bytes);
-
-        return responseData;
-    }
-
-    public void Destroy()
-    {
-        shouldRun = false;
-
-        stream.Close();
-        client.Close();
-    }
+    string bufferString = "";
+    int packetSize = 0;
 
     public String message
     {
@@ -237,6 +199,102 @@ public class SocketThreadManager
         {
             responseString = value;
         }
+    }
+
+    void Process() {
+        while (shouldRun)
+        {
+            if (message == null)
+            {
+                continue;
+            }
+            // Send test data to the remote device.
+
+            Send(message);
+            response = Receive();
+
+            Thread.Sleep(500);
+        }
+    }
+
+    
+
+    public void doConnect(String host, int port)
+    {
+        Debug.Log("! connecting to tcp");
+
+        TcpClient client = new TcpClient(host, port);
+        stream = client.GetStream();
+
+        communicationState = CommunicationState.READY;
+
+        thread = new Thread(Process);
+        thread.Start();
+    }
+
+    void Send(String message)
+    {
+        Byte[] data = System.Text.Encoding.ASCII.GetBytes(message);
+
+        stream.Write(data, 0, data.Length);
+    }
+
+    String Receive()
+    {
+        // Buffer to store the response bytes.
+        Byte[] data = new Byte[1024];
+
+        // String to store the response ASCII representation.
+        String responseData = String.Empty;
+
+        // Read the first batch of the TcpServer response bytes.
+        Int32 bytes = stream.Read(data, 0, data.Length);
+        responseData = System.Text.Encoding.ASCII.GetString(data, 0, bytes);
+
+        // Merge response with earlier overreceived data
+        responseData = bufferString + responseData;
+        packetSize += sep(ref responseData);
+
+        // If we didn't receive complete packet - add response to bufferString
+        if (packetSize > responseData.Length)
+        {
+            bufferString += responseData;
+            return "";
+        }
+        
+        // Received full JSON packet - return response, substract response from bufferString
+        bufferString = responseData.Substring(packetSize);
+        responseData = responseData.Substring(0, packetSize);
+        packetSize = 0;
+
+        return responseData;
+    }
+
+    public void Destroy()
+    {
+        shouldRun = false;
+
+        stream.Close();
+        client.Close();
+    }
+
+
+
+    private static int sep(ref string s)
+    {
+        int l = s.IndexOf("#");
+        if (l > 0)
+        {
+            string numberString = s.Substring(0, l);
+
+            Debug.Log("number string : " + numberString);
+
+            int result = int.Parse(numberString);
+            s = s.Substring(l+1);
+            return result;
+        }
+        return 0;
+
     }
 }
 
