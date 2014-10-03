@@ -77,6 +77,7 @@ public class NodeJsSocketConnector : MonoBehaviour {
         float posY = gameController.player.transform.position.y;
         float posZ = gameController.player.transform.position.z;
         float yaw = gameController.player.transform.rotation.eulerAngles.y;
+        int hp = gameController.player.GetComponent<CharacterStats>().health;
 
         socketThreadManager.message = "{ "
             + "\"fightId\": " + fightId
@@ -85,6 +86,7 @@ public class NodeJsSocketConnector : MonoBehaviour {
             + ", \"posY\": " + posY
             + ", \"posZ\": " + posZ
             + ", \"yaw\": " + yaw
+            + ", \"hp\": " + hp
             + "}";
 
         Debug.Log("Message : " + socketThreadManager.message);
@@ -100,8 +102,21 @@ public class NodeJsSocketConnector : MonoBehaviour {
                 return;
             }
 
+            if (response.Substring(0, 7) == "WAITING")
+            {
+                errorMsg = response;
+                return;
+            }
+
+            if (response.Substring(0, 8) == "FINISHED")
+            {
+                errorMsg = response;
+                return;
+            }
+
             var responseObj = SimpleJSON.JSON.Parse(socketThreadManager.response);
 
+            //gamecontroller.enemy.hp = responseObj["enemy"]["hp"].AsInteger
             gameController.enemy.transform.position = new Vector3(
                 responseObj["enemy"]["x"].AsFloat,
                 responseObj["enemy"]["y"].AsFloat,
