@@ -5,6 +5,7 @@ using System.Net.Sockets;
 using System;
 using System.Text;
 using System.Threading;
+using System.Diagnostics;
 
 public enum CommunicationState
 {
@@ -66,7 +67,7 @@ public class NodeJsSocketConnector : MonoBehaviour {
         }
         else if (gameController.gameState == GameState.CONNECTING_VIA_TCP)
         {
-            Debug.Log("Connecting to tcp");
+            UnityEngine.Debug.Log("Connecting to tcp");
             socketThreadManager.doConnect(host, port);
         }
 	}
@@ -89,12 +90,12 @@ public class NodeJsSocketConnector : MonoBehaviour {
             + ", \"hp\": " + hp
             + "}";
 
-        Debug.Log("Message : " + socketThreadManager.message);
+        UnityEngine.Debug.Log("Message : " + socketThreadManager.message);
 
         String response = socketThreadManager.response;
         if (response != null && response != "")
         {
-            Debug.Log("Substracted JSON : " + response);
+            UnityEngine.Debug.Log("Substracted JSON : " + response);
 
             if (response.Substring(0, 5) == "ERROR")
             {
@@ -133,6 +134,8 @@ public class NodeJsSocketConnector : MonoBehaviour {
 
     void OnGUI()
     {
+        GUI.Label(new Rect(30, 30, 100, 20), "Ping : " + socketThreadManager.lag);
+
         /*
         if (socketThreadManager.communicationState == CommunicationState.NOT_READY)
         {
@@ -191,6 +194,10 @@ public class SocketThreadManager
     String responseString = null;
     Thread thread;
 
+    Stopwatch stopWatch = new Stopwatch();
+
+    public long lag = 0;
+
     bool shouldRun = true;
 
     string bufferString = "";
@@ -228,11 +235,14 @@ public class SocketThreadManager
                 continue;
             }
             // Send test data to the remote device.
-
+            stopWatch.Start();
             Send(message);
             response = Receive();
+            stopWatch.Stop();
+            lag = stopWatch.ElapsedMilliseconds;
+            stopWatch.Reset();
 
-            Thread.Sleep(500);
+            //Thread.Sleep(100);
         }
     }
 
@@ -240,7 +250,7 @@ public class SocketThreadManager
 
     public void doConnect(String host, int port)
     {
-        Debug.Log("! connecting to tcp");
+        UnityEngine.Debug.Log("! connecting to tcp");
 
         TcpClient client = new TcpClient(host, port);
         stream = client.GetStream();
@@ -291,7 +301,7 @@ public class SocketThreadManager
 
     public void Destroy()
     {
-        Debug.Log("Destroying thread");
+        UnityEngine.Debug.Log("Destroying thread");
 
         shouldRun = false;
 
@@ -314,7 +324,7 @@ public class SocketThreadManager
         {
             string numberString = s.Substring(0, l);
 
-            Debug.Log("number string : " + numberString);
+            UnityEngine.Debug.Log("number string : " + numberString);
 
             int result = int.Parse(numberString);
             s = s.Substring(l+1);
