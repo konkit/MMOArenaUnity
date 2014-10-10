@@ -81,7 +81,7 @@ public class CharacterSpellcasting : MonoBehaviour {
 	}
 
 	private void LoadSpellPrefabs() {
-		RetreiveDataScript script = FindObjectOfType(typeof( RetreiveDataScript )) as RetreiveDataScript;
+		PrefabsHolder script = FindObjectOfType(typeof( PrefabsHolder )) as PrefabsHolder;
 		prefabs = script.prefabs;
 	}
 }

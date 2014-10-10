@@ -35020,11 +35020,11 @@ GameObject:
   m_Component:
   - 4: {fileID: 1443588899}
   - 114: {fileID: 1443588900}
+  - 114: {fileID: 1443588898}
   - 114: {fileID: 1443588904}
   - 114: {fileID: 1443588905}
   - 114: {fileID: 1443588902}
   - 114: {fileID: 1443588906}
-  - 114: {fileID: 1443588898}
   m_Layer: 0
   m_Name: ScriptHolder
   m_TagString: Untagged
@@ -35038,14 +35038,11 @@ MonoBehaviour:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1443588897}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 43c9dab854f56254481f109e1be0c152, type: 3}
+  m_Script: {fileID: 11500000, guid: 9d034f959d7909d42ada6513a2088353, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  serverAddress: http://localhost:8080/GrailsMMOArena
-  player: {fileID: 0}
-  enemy: {fileID: 0}
   prefabs: []
 --- !u!4 &1443588899
 Transform:
