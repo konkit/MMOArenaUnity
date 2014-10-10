@@ -34,7 +34,7 @@ public class AbstractHttpFetcher : MonoBehaviour {
 
         if (www.error != null)
         {
-            throw new UnityException("Retreive FightData error : " + www.error);
+            throw new UnityException("Http request error : " + www.error);
         }
 
         receivedData = www.text;

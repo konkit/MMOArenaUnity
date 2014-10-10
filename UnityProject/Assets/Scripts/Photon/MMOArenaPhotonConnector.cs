@@ -48,11 +48,14 @@ public class MMOArenaPhotonConnector : MonoBehaviour {
 
     void OnJoinedRoom()
     {
-        GameObject monster = PhotonNetwork.Instantiate("MAX_Photon", Vector3.zero, Quaternion.identity, 0);
-        monster.GetComponent<CharacterControlInterface>().enabled = true;
-        monster.GetComponent<PlayerMovementController>().enabled = true;
-        monster.GetComponent<MouseController>().enabled = true;
-        monster.GetComponent<HumanPlayerController>().enabled = true;
+        GameObject character = PhotonNetwork.Instantiate("MAX_Photon", Vector3.zero, Quaternion.identity, 0);
+        character.GetComponent<CharacterControlInterface>().enabled = true;
+        character.GetComponent<PlayerMovementController>().enabled = true;
+        character.GetComponent<MouseController>().enabled = true;
+        character.GetComponent<HumanPlayerController>().enabled = true;
+
+        PlayerDataFetcher playerDataFetcher = GetComponent<PlayerDataFetcher>();
+        character.GetComponent<CharacterStats>().LoadFromData(playerDataFetcher.playerData);
 
         //gameController.gameState = GameState.ONGOING;
     }

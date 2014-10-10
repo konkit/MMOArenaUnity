@@ -2684,6 +2684,46 @@ ParticleSystem:
     subEmitterCollision1: {fileID: 0}
     subEmitterDeath: {fileID: 0}
     subEmitterDeath1: {fileID: 0}
+--- !u!1001 &107587541
+Prefab:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 400000, guid: d400bc38916fb7f42a5f4e949b16154f, type: 2}
+      propertyPath: m_LocalPosition.x
+      value: -6.65820742
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: d400bc38916fb7f42a5f4e949b16154f, type: 2}
+      propertyPath: m_LocalPosition.y
+      value: -.00732383132
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: d400bc38916fb7f42a5f4e949b16154f, type: 2}
+      propertyPath: m_LocalPosition.z
+      value: 1.24190009
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: d400bc38916fb7f42a5f4e949b16154f, type: 2}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: d400bc38916fb7f42a5f4e949b16154f, type: 2}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: d400bc38916fb7f42a5f4e949b16154f, type: 2}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: d400bc38916fb7f42a5f4e949b16154f, type: 2}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_ParentPrefab: {fileID: 100100000, guid: d400bc38916fb7f42a5f4e949b16154f, type: 2}
+  m_RootGameObject: {fileID: 1443588897}
+  m_IsPrefabParent: 0
+  m_IsExploded: 1
 --- !u!1 &163171464
 GameObject:
   m_ObjectHideFlags: 0
@@ -35014,12 +35054,11 @@ ParticleSystem:
 --- !u!1 &1443588897
 GameObject:
   m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
+  m_PrefabParentObject: {fileID: 100000, guid: d400bc38916fb7f42a5f4e949b16154f, type: 2}
+  m_PrefabInternal: {fileID: 107587541}
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 1443588899}
-  - 114: {fileID: 1443588900}
   - 114: {fileID: 1443588898}
   - 114: {fileID: 1443588904}
   - 114: {fileID: 1443588905}
@@ -35035,8 +35074,9 @@ GameObject:
 --- !u!114 &1443588898
 MonoBehaviour:
   m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
+  m_PrefabParentObject: {fileID: 11400000, guid: d400bc38916fb7f42a5f4e949b16154f,
+    type: 2}
+  m_PrefabInternal: {fileID: 107587541}
   m_GameObject: {fileID: 1443588897}
   m_Enabled: 1
   m_EditorHideFlags: 0
@@ -35047,54 +35087,20 @@ MonoBehaviour:
 --- !u!4 &1443588899
 Transform:
   m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
+  m_PrefabParentObject: {fileID: 400000, guid: d400bc38916fb7f42a5f4e949b16154f, type: 2}
+  m_PrefabInternal: {fileID: 107587541}
   m_GameObject: {fileID: 1443588897}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -6.65820742, y: -.00732383132, z: 1.24190009}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
---- !u!114 &1443588900
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1443588897}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7c532ed2ebf9e0347876eb8814e707a5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  playerStats: {fileID: 0}
-  enemyStats: {fileID: 0}
-  playerLeft: 470
-  playerTop: 125
-  enemyLeft: 270
-  enemyTop: 125
-  healthbarbaseTexture: {fileID: 2800000, guid: 712cc3252dfe40247afb843aaf368674,
-    type: 3}
-  healthbargreenTexture: {fileID: 2800000, guid: c85a637e695d957488feb382111eeb26,
-    type: 3}
-  healthbaryellowTexture: {fileID: 2800000, guid: 4ab1ca37e5b4bc644b99e72a6b647ec9,
-    type: 3}
-  healthbarredTexture: {fileID: 2800000, guid: a799f596b48e59842ab3bdf05050b782, type: 3}
-  labels:
-  - {fileID: 2800000, guid: a40bb22c48b3a57418e3a1c91840c3d4, type: 3}
-  - {fileID: 2800000, guid: ac427a711d8ad3c4ebb373f858f3c9b2, type: 3}
-  width: 500
-  height: 300
-  windowRect:
-    serializedVersion: 2
-    x: 0
-    y: 0
-    width: 0
-    height: 0
 --- !u!114 &1443588902
 MonoBehaviour:
   m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
+  m_PrefabParentObject: {fileID: 11400004, guid: d400bc38916fb7f42a5f4e949b16154f,
+    type: 2}
+  m_PrefabInternal: {fileID: 107587541}
   m_GameObject: {fileID: 1443588897}
   m_Enabled: 1
   m_EditorHideFlags: 0
@@ -35102,46 +35108,49 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   receivedData: 
-  serverAddress: http://localhost:5000
+  serverAddress: http://107.155.108.250:5000
   actionName: /getFight
-  roomName: asdf
+  roomName: 
   requestSent: 0
 --- !u!114 &1443588904
 MonoBehaviour:
   m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
+  m_PrefabParentObject: {fileID: 11400006, guid: d400bc38916fb7f42a5f4e949b16154f,
+    type: 2}
+  m_PrefabInternal: {fileID: 107587541}
   m_GameObject: {fileID: 1443588897}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 112ba39f252324e4eb3d56d1332cac54, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   receivedData: 
-  serverAddress: http://localhost:8080/GrailsMMOArena
+  serverAddress: http://107.155.108.250:8888/GrailsMMOArena-0.1
   controllerName: /fight
   actionName: /getPlayerData
   playerId: 0
 --- !u!114 &1443588905
 MonoBehaviour:
   m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
+  m_PrefabParentObject: {fileID: 11400008, guid: d400bc38916fb7f42a5f4e949b16154f,
+    type: 2}
+  m_PrefabInternal: {fileID: 107587541}
   m_GameObject: {fileID: 1443588897}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 6375d10530badd34ea06593bbc4b5d77, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   receivedData: 
-  serverAddress: http://localhost:5000
+  serverAddress: http://107.155.108.250:5000
   actionName: /requestFight
   requestId: 
 --- !u!114 &1443588906
 MonoBehaviour:
   m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
+  m_PrefabParentObject: {fileID: 11400010, guid: d400bc38916fb7f42a5f4e949b16154f,
+    type: 2}
+  m_PrefabInternal: {fileID: 107587541}
   m_GameObject: {fileID: 1443588897}
   m_Enabled: 1
   m_EditorHideFlags: 0
