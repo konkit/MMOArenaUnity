@@ -13,6 +13,7 @@ GameObject:
   - 114: {fileID: 11400008}
   - 114: {fileID: 11400004}
   - 114: {fileID: 11400010}
+  - 114: {fileID: 11400002}
   m_Layer: 0
   m_Name: ScriptHolder
   m_TagString: Untagged
@@ -43,6 +44,22 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   prefabs: []
+--- !u!114 &11400002
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 100000}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6d9c32c2129c6aa47b60e32021dbddcf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  receivedData: 
+  serverAddress: http://107.155.108.250:8888/GrailsMMOArena-0.1
+  controllerName: /fight
+  actionName: /storeResults
+  player: {fileID: 0}
 --- !u!114 &11400004
 MonoBehaviour:
   m_ObjectHideFlags: 1

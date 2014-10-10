@@ -40,9 +40,9 @@ public class RoomNameFetcher : AbstractHttpFetcher
         string state = SimpleJSON.JSON.Parse(data)["state"]["fightState"];
 
         // if state is scheduled, then setup roomName
-        if (state == "SCHEDULED")
+        if (state == "PREPARED")
         {
-            roomName = SimpleJSON.JSON.Parse(data)["roomName"];
+            roomName = SimpleJSON.JSON.Parse(data)["state"]["fightId"];
         }
         else
         {

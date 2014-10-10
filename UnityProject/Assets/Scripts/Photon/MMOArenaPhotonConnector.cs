@@ -43,7 +43,9 @@ public class MMOArenaPhotonConnector : MonoBehaviour {
     void OnPhotonJoinRoomFailed()
     {
         Debug.Log("No such room with name : " + roomName + ", creating!");
-        PhotonNetwork.CreateRoom(roomName);
+        RoomOptions roomOptions = new RoomOptions();
+            roomOptions.maxPlayers = 2;
+        PhotonNetwork.JoinOrCreateRoom(roomName, roomOptions, TypedLobby.Default);
     }
 
     void OnJoinedRoom()
@@ -56,6 +58,9 @@ public class MMOArenaPhotonConnector : MonoBehaviour {
 
         PlayerDataFetcher playerDataFetcher = GetComponent<PlayerDataFetcher>();
         character.GetComponent<CharacterStats>().LoadFromData(playerDataFetcher.playerData);
+
+        FightResultSender fightResultSender = GetComponent<FightResultSender>();
+        fightResultSender.player = character.GetComponent<CharacterStats>();
 
         //gameController.gameState = GameState.ONGOING;
     }
