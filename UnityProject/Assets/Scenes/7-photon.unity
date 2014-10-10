@@ -35019,10 +35019,12 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 1443588899}
-  - 114: {fileID: 1443588898}
   - 114: {fileID: 1443588900}
-  - 114: {fileID: 1443588901}
-  - 114: {fileID: 1443588903}
+  - 114: {fileID: 1443588904}
+  - 114: {fileID: 1443588905}
+  - 114: {fileID: 1443588902}
+  - 114: {fileID: 1443588906}
+  - 114: {fileID: 1443588898}
   m_Layer: 0
   m_Name: ScriptHolder
   m_TagString: Untagged
@@ -35036,20 +35038,15 @@ MonoBehaviour:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1443588897}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e8c2d851da76eb84ea8230e66604edda, type: 3}
+  m_Script: {fileID: 11500000, guid: 43c9dab854f56254481f109e1be0c152, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemy: {fileID: 0}
+  serverAddress: http://localhost:8080/GrailsMMOArena
   player: {fileID: 0}
-  victory: 0
-  defeat: 0
-  isPaused: 0
-  retreiveDataScript: {fileID: 1443588901}
-  nodeJsSocketConnector: {fileID: 0}
-  gameState: 0
-  errorMsg: 
+  enemy: {fileID: 0}
+  prefabs: []
 --- !u!4 &1443588899
 Transform:
   m_ObjectHideFlags: 0
@@ -35067,7 +35064,7 @@ MonoBehaviour:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1443588897}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 7c532ed2ebf9e0347876eb8814e707a5, type: 3}
   m_Name: 
@@ -35096,7 +35093,7 @@ MonoBehaviour:
     y: 0
     width: 0
     height: 0
---- !u!114 &1443588901
+--- !u!114 &1443588902
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
@@ -35104,17 +35101,46 @@ MonoBehaviour:
   m_GameObject: {fileID: 1443588897}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 43c9dab854f56254481f109e1be0c152, type: 3}
+  m_Script: {fileID: 11500000, guid: 74cce0b884cc4244696caf507dbcceb7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  serverAddress: http://107.155.108.250:8888/GrailsMMOArena-0.1
-  player: {fileID: 0}
-  enemy: {fileID: 0}
-  prefabs:
-  - {fileID: 100000, guid: 224c22ea3ac022b468fa3668819c7762, type: 2}
-  - {fileID: 100002, guid: 5d12edcf72914c04a9f7b1913cb0ff8e, type: 2}
-  - {fileID: 100000, guid: 9acfc229f0789344f99f8544ce874323, type: 2}
---- !u!114 &1443588903
+  receivedData: 
+  serverAddress: http://localhost:5000
+  actionName: /getFight
+  roomName: asdf
+  requestSent: 0
+--- !u!114 &1443588904
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1443588897}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 112ba39f252324e4eb3d56d1332cac54, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  receivedData: 
+  serverAddress: http://localhost:8080/GrailsMMOArena
+  controllerName: /fight
+  actionName: /getPlayerData
+  playerId: 0
+--- !u!114 &1443588905
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1443588897}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6375d10530badd34ea06593bbc4b5d77, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  receivedData: 
+  serverAddress: http://localhost:5000
+  actionName: /requestFight
+  requestId: 
+--- !u!114 &1443588906
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
@@ -35122,10 +35148,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 1443588897}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9e4253863ae332e4dba812cc62e52cb1, type: 3}
+  m_Script: {fileID: 11500000, guid: 6c4171144c7f7734da1f22896c8607a4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerPrefab: {fileID: 0}
 --- !u!1 &1453062631
 GameObject:
   m_ObjectHideFlags: 0

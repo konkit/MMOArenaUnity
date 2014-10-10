@@ -39,6 +39,7 @@ public class FightAwards
     public int expEarned { get; set; }
 }
 
+[XmlRoot("character")]
 public class Character {
     [XmlAttribute("id")]
     public int Id { get; set; }

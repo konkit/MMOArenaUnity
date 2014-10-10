@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class KonkitNetworkView : MonoBehaviour {
+public class MMOArenaPhotonNetworkView : MonoBehaviour {
 
     private Vector3 correctPlayerPos;
     private Quaternion correctPlayerRot;
