@@ -32,4 +32,5 @@ MonoBehaviour:
   - RequestForPickupTimes
   - SetPosition
   - TaggedPlayer
+  - InstantiateSpell
   DisableAutoOpenWizard: 0

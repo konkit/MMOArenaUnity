@@ -74,6 +74,7 @@ public class Item {
 	public string name { get; set; }
 }
 
+[System.Serializable]
 public class Spell { 
 	[XmlElement("name")]
 	public string name {get; set;}
@@ -99,8 +100,21 @@ public class ItemPossession {
 	public bool isEquiped { get; set; }
 }
 
+[System.Serializable]
 public class SpellPossession {
 	[XmlElement("spell")]
 	public Spell spell { get; set;}
+
+    public string ToString()
+    {
+        if (spell == null)
+        {
+            return "NULL";
+        }
+        else
+        {
+            return "Spell : " + spell.name;
+        }
+    }
 }
 

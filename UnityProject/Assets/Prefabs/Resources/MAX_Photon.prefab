@@ -167,13 +167,13 @@ GameObject:
   - 114: {fileID: 11400006}
   - 114: {fileID: 11400004}
   - 135: {fileID: 13500000}
-  - 114: {fileID: 11400010}
-  - 114: {fileID: 11400012}
-  - 114: {fileID: 11400016}
   - 114: {fileID: 11400002}
   - 114: {fileID: 11400014}
   - 114: {fileID: 11400000}
   - 114: {fileID: 11400018}
+  - 114: {fileID: 11400020}
+  - 114: {fileID: 11400010}
+  - 114: {fileID: 11400012}
   m_Layer: 0
   m_Name: MAX_Photon
   m_TagString: Player
@@ -2071,7 +2071,7 @@ MonoBehaviour:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100020}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 5aa26a30ed016e043b0a84aa11fafcfd, type: 3}
   m_Name: 
@@ -2088,7 +2088,7 @@ MonoBehaviour:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100020}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 8995cc08058feab42bd1a67a9a9f2389, type: 3}
   m_Name: 
@@ -2107,24 +2107,9 @@ MonoBehaviour:
   name: 
   level: 0
   exp: 0
-  health: 0
-  maxhealth: 0
+  health: 100
+  maxhealth: 100
   isDeath: 0
---- !u!114 &11400016
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 100020}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c9125e6cff1865040a1f4d9dd756dabb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  prefabs: []
-  currentSpellNum: 1
-  spellHeight: 1.39999998
-  currentCooldown: 0
 --- !u!114 &11400018
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2137,6 +2122,23 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   photonView: {fileID: 0}
+--- !u!114 &11400020
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 100020}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 618427d3a5ab8c246adf93739d70ca21, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  prefabs:
+  - {fileID: 100000, guid: 224c22ea3ac022b468fa3668819c7762, type: 2}
+  currentSpellNum: 1
+  spellHeight: 1.39999998
+  currentCooldown: 0
+  controlInterface: {fileID: 11400010}
 --- !u!135 &13500000
 SphereCollider:
   m_ObjectHideFlags: 1

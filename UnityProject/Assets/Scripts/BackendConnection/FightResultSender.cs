@@ -13,6 +13,7 @@ public class FightResultSender : AbstractHttpFormSender {
     FightAwards fightAwards = null;
 
     public CharacterStats player = null;
+    public CharacterStats enemy = null;
 
 	// Use this for initialization
 	void Start () {

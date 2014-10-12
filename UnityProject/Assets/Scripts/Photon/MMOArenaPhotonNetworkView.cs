@@ -24,6 +24,7 @@ public class MMOArenaPhotonNetworkView : MonoBehaviour {
         {
             transform.position = Vector3.Lerp(transform.position, this.correctPlayerPos, Time.deltaTime * 5);
             transform.rotation = Quaternion.Lerp(transform.rotation, this.correctPlayerRot, Time.deltaTime * 5);
+            characterStats.health = healthAmount;
         }
         else
         {

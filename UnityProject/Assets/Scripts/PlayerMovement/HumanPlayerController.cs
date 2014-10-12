@@ -3,7 +3,7 @@ using System.Collections;
 
 public class HumanPlayerController : MonoBehaviour {
 
-	CharacterControlInterface controlInterface;
+	public CharacterControlInterface controlInterface;
 
 	// Use this for initialization
 	void Start () {
@@ -20,7 +20,7 @@ public class HumanPlayerController : MonoBehaviour {
 		controlInterface.sidewaysMov = Input.GetAxis("Horizontal");
 		
 		controlInterface.isJump = Input.GetButton("Jump");
-		controlInterface.isPunch = Input.GetMouseButtonDown(0);
+		controlInterface.isPunch = Input.GetMouseButton(0);
 
 		controlInterface.nextSpell = Input.GetKeyDown( KeyCode.E );
 		controlInterface.previousSpell = Input.GetKeyDown( KeyCode.Q );

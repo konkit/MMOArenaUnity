@@ -3,6 +3,8 @@ using System.Collections;
 
 public class MMOArenaPhotonConnector : MonoBehaviour {
 
+    public bool isOffline = false;
+
     RoomNameFetcher roomNameFetcher;
 
     bool isConnected = false;
@@ -19,7 +21,17 @@ public class MMOArenaPhotonConnector : MonoBehaviour {
         if ( !isConnected && roomNameFetcher != null && roomNameFetcher.roomName != "" )
         {
             isConnected = true;
-            Connect(roomNameFetcher.roomName);
+
+            if (isOffline)
+            {
+                Debug.Log("Setting offline mode");
+                PhotonNetwork.offlineMode = true;
+                PhotonNetwork.CreateRoom("offlinemoderoom");
+            }
+            else
+            {
+                Connect(roomNameFetcher.roomName);
+            }            
         }
 	}
 
@@ -59,8 +71,10 @@ public class MMOArenaPhotonConnector : MonoBehaviour {
         PlayerDataFetcher playerDataFetcher = GetComponent<PlayerDataFetcher>();
         character.GetComponent<CharacterStats>().LoadFromData(playerDataFetcher.playerData);
 
-        FightResultSender fightResultSender = GetComponent<FightResultSender>();
-        fightResultSender.player = character.GetComponent<CharacterStats>();
+        character.GetComponent<PhotonCharacterSpellcasting>().LoadSpells(playerDataFetcher.playerData);
+
+        //FightResultSender fightResultSender = GetComponent<FightResultSender>();
+        //fightResultSender.player = character.GetComponent<CharacterStats>();
 
         //gameController.gameState = GameState.ONGOING;
     }

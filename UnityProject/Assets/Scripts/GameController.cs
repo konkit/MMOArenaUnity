@@ -3,10 +3,11 @@ using System.Collections;
 
 public class GameController : MonoBehaviour {
 
-    public GameObject player;
-    public GameObject enemy;
+    public CharacterStats player;
+    public CharacterStats enemy;
 
-    bool isGameStarted = false;
+    public bool isGameStarted = false;
+    public bool isGameFinished = false;
 
 	// Use this for initialization
 	void Start () {
@@ -27,15 +28,16 @@ public class GameController : MonoBehaviour {
             {
                 if ( characterStats[0].GetComponent<PhotonView>().isMine )
                 {
-                    player = characterStats[0].gameObject;
-                    enemy = characterStats[1].gameObject;
+                    player = characterStats[0];
+                    enemy = characterStats[1];
                 } else {
-                    player = characterStats[1].gameObject;
-                    enemy = characterStats[0].gameObject;
+                    player = characterStats[1];
+                    enemy = characterStats[0];
                 }
 
                 isGameStarted = true;
             }
         }
+
 	}
 }
