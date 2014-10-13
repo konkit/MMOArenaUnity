@@ -13830,11 +13830,15 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 11400010, guid: d400bc38916fb7f42a5f4e949b16154f, type: 2}
       propertyPath: isOffline
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 11400004, guid: d400bc38916fb7f42a5f4e949b16154f, type: 2}
       propertyPath: roomName
       value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 11400002, guid: d400bc38916fb7f42a5f4e949b16154f, type: 2}
+      propertyPath: m_Enabled
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: d400bc38916fb7f42a5f4e949b16154f, type: 2}
@@ -35115,7 +35119,7 @@ MonoBehaviour:
     type: 2}
   m_PrefabInternal: {fileID: 678500086}
   m_GameObject: {fileID: 1443588897}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 6d9c32c2129c6aa47b60e32021dbddcf, type: 3}
   m_Name: 
@@ -35124,8 +35128,8 @@ MonoBehaviour:
   serverAddress: http://107.155.108.250:8888/GrailsMMOArena-0.1
   controllerName: /fight
   actionName: /storeResults
-  player: {fileID: 0}
-  enemy: {fileID: 0}
+  isResultsSent: 0
+  gameController: {fileID: 0}
 --- !u!114 &1443588901
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -35204,7 +35208,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6c4171144c7f7734da1f22896c8607a4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isOffline: 1
+  isOffline: 0
+  playerId: -1
 --- !u!1 &1453062631
 GameObject:
   m_ObjectHideFlags: 0

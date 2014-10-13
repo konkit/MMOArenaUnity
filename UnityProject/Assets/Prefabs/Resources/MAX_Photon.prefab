@@ -2088,11 +2088,12 @@ MonoBehaviour:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100020}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 8995cc08058feab42bd1a67a9a9f2389, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  controlInterface: {fileID: 0}
 --- !u!114 &11400014
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2135,6 +2136,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   prefabs:
   - {fileID: 100000, guid: 224c22ea3ac022b468fa3668819c7762, type: 2}
+  spellPossession: []
   currentSpellNum: 1
   spellHeight: 1.39999998
   currentCooldown: 0

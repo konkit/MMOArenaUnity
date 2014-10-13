@@ -11,6 +11,8 @@ public class MMOArenaPhotonConnector : MonoBehaviour {
 
     protected string roomName = "";
 
+    public int playerId = -1;
+
 	// Use this for initialization
 	void Start () {
         roomNameFetcher = GetComponent<RoomNameFetcher>();
@@ -44,6 +46,7 @@ public class MMOArenaPhotonConnector : MonoBehaviour {
     void OnGUI()
     {
         GUILayout.Label(PhotonNetwork.connectionStateDetailed.ToString());
+        GUILayout.Label(PhotonNetwork.player.ID.ToString());
     }
 
     void OnJoinedLobby()
@@ -63,19 +66,25 @@ public class MMOArenaPhotonConnector : MonoBehaviour {
     void OnJoinedRoom()
     {
         GameObject character = PhotonNetwork.Instantiate("MAX_Photon", Vector3.zero, Quaternion.identity, 0);
-        character.GetComponent<CharacterControlInterface>().enabled = true;
-        character.GetComponent<PlayerMovementController>().enabled = true;
-        character.GetComponent<MouseController>().enabled = true;
-        character.GetComponent<HumanPlayerController>().enabled = true;
 
-        PlayerDataFetcher playerDataFetcher = GetComponent<PlayerDataFetcher>();
-        character.GetComponent<CharacterStats>().LoadFromData(playerDataFetcher.playerData);
+        PhotonView photonView = character.GetComponent<PhotonView>() as PhotonView;
+        if ( photonView.isMine )
+        {
+            Debug.Log("Its me connected");
 
-        character.GetComponent<PhotonCharacterSpellcasting>().LoadSpells(playerDataFetcher.playerData);
+            //character.GetComponent<CharacterControlInterface>().enabled = true;
+            character.GetComponent<PlayerMovementController>().enabled = true;
+            character.GetComponent<MouseController>().enabled = true;
+            character.GetComponent<HumanPlayerController>().enabled = true;
 
-        //FightResultSender fightResultSender = GetComponent<FightResultSender>();
-        //fightResultSender.player = character.GetComponent<CharacterStats>();
+            PlayerDataFetcher playerDataFetcher = GetComponent<PlayerDataFetcher>();
+            character.GetComponent<CharacterStats>().LoadFromData(playerDataFetcher.playerData);
 
-        //gameController.gameState = GameState.ONGOING;
+            character.GetComponent<PhotonCharacterSpellcasting>().LoadSpells(playerDataFetcher.playerData);
+        }
+        else
+        {
+            Debug.Log("Its other player connected");
+        }
     }
 }

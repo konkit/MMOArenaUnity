@@ -32,10 +32,6 @@ public class PhotonCharacterSpellcasting : MonoBehaviour {
     // Update is called once per frame
     void Update()
     {
-        Debug.Log("Spell possession[0] = " + spellPossession[0]);
-        Debug.Log("Spell possession[0].spell.name = " + spellPossession[0].ToString());
-
-
         if (spellPossession == null)
         {
             return;
@@ -43,7 +39,7 @@ public class PhotonCharacterSpellcasting : MonoBehaviour {
 
         if (currentCooldown > 0.0f)
         {
-            currentCooldown -= Time.deltaTime * 1000;
+            currentCooldown -= Time.deltaTime * 10;
         }
 
         if (controlInterface.isPunch)
@@ -116,19 +112,19 @@ public class PhotonCharacterSpellcasting : MonoBehaviour {
     }
 
 
-
     public void CastSpell() {
         if (currentCooldown <= 0.0f)
         {
-            photonView.RPC("InstantiateSpell", PhotonTargets.All);
-            currentCooldown = spellPossession[currentSpellNum].spell.cooldownTime;
+            Spell cntSpell = spellPossession[currentSpellNum].spell;
+
+            photonView.RPC("InstantiateSpell", PhotonTargets.All, currentSpellNum);
+            currentCooldown = cntSpell.cooldownTime;
         }
     }
 
     [RPC]
-    public void InstantiateSpell() {
-        Spell cntSpell = spellPossession[currentSpellNum].spell;
-        GameObject cntPrefab = prefabs[0];
+    public void InstantiateSpell(int prefabTypeNum) {
+        GameObject cntPrefab = prefabs[prefabTypeNum];
 
         Vector3 instantiatePos = (transform.position + new Vector3(0.0f, spellHeight, 0.0f)) + transform.forward;
         Instantiate(cntPrefab, instantiatePos, transform.rotation);

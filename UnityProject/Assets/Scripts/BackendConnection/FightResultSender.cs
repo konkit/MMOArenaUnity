@@ -12,29 +12,30 @@ public class FightResultSender : AbstractHttpFormSender {
 
     FightAwards fightAwards = null;
 
-    public CharacterStats player = null;
-    public CharacterStats enemy = null;
+    public bool isResultsSent = false;
+
+    public GameController gameController;
 
 	// Use this for initialization
 	void Start () {
-        
+        gameController = GetComponent<GameController>();
 	}
 	
 	// Update is called once per frame
 	void Update () {
-        if (player == null)
+        if (gameController.isGameFinished)
         {
-            return;
+            isResultsSent = true;
+
+            Send();
         }
-
-
 	}
 
     void Send()
     {
         form = new WWWForm();
 
-        form.AddField("playerHealthRemained", player.GetComponent<CharacterStats>().health);
+        form.AddField("playerHealthRemained", gameController.player.GetComponent<CharacterStats>().health);
         //form.AddField("enemyHealthRemained", enemy.GetComponent<CharacterStats>().health);
 
         StartCoroutine(SendCoroutine());

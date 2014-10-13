@@ -31,13 +31,18 @@ public class CharacterStats : MonoBehaviour {
 		health = maxhealth = characterData.MaxHealth;
 	}
 
+    [RPC]
 	public void decreaseHealth(int amount) {
+        Debug.Log("Decreasing health from " + gameObject + " player, amount : " + amount);
+
 		health -= amount;
 		
 		if( health <= 0 ) {
 			doDead();
 			health = 0;
 		}
+
+        Debug.Log("Resulting health = " + health);
 	}
 	
 	void doDead() {
