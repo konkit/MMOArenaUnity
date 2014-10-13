@@ -33,4 +33,5 @@ MonoBehaviour:
   - SetPosition
   - TaggedPlayer
   - InstantiateSpell
+  - decreaseHealth
   DisableAutoOpenWizard: 0

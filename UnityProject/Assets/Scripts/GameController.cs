@@ -38,6 +38,13 @@ public class GameController : MonoBehaviour {
                 isGameStarted = true;
             }
         }
+        else if( isGameStarted == true )
+        {
+            if (player.health <= 0 || enemy.health <= 0)
+            {
+                isGameFinished = true;
+            }
+        }
 
 	}
 }

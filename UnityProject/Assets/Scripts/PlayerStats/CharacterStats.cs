@@ -47,6 +47,6 @@ public class CharacterStats : MonoBehaviour {
 	
 	void doDead() {
 		isDeath = true;
-		deathDelegate();
+		//deathDelegate();
 	}
 }

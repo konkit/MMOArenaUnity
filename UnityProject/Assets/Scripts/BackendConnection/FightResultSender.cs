@@ -23,10 +23,10 @@ public class FightResultSender : AbstractHttpFormSender {
 	
 	// Update is called once per frame
 	void Update () {
-        if (gameController.isGameFinished)
+        if (gameController.isGameFinished && isResultsSent == false)
         {
             isResultsSent = true;
-
+            absoluteAddress = serverAddress + controllerName + actionName;
             Send();
         }
 	}
