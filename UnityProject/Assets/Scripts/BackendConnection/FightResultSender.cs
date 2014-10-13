@@ -36,7 +36,9 @@ public class FightResultSender : AbstractHttpFormSender {
         form = new WWWForm();
 
         form.AddField("playerHealthRemained", gameController.player.GetComponent<CharacterStats>().health);
-        //form.AddField("enemyHealthRemained", enemy.GetComponent<CharacterStats>().health);
+        form.AddField("enemyHealthRemained", gameController.enemy.GetComponent<CharacterStats>().health);
+
+        receiveCallback += OnDataReceived;
 
         StartCoroutine(SendCoroutine());
     }
@@ -48,6 +50,7 @@ public class FightResultSender : AbstractHttpFormSender {
         fightAwards = serializer.Deserialize(stream) as FightAwards;
         stream.Close();
 
+        Debug.Log("Received results : " + fightAwards.hasWon);
         //gameController.ResultSendSuccessful();
     }
 }
