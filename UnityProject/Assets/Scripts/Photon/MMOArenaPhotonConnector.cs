@@ -67,24 +67,19 @@ public class MMOArenaPhotonConnector : MonoBehaviour {
     {
         GameObject character = PhotonNetwork.Instantiate("MAX_Photon", Vector3.zero, Quaternion.identity, 0);
 
-        PhotonView photonView = character.GetComponent<PhotonView>() as PhotonView;
-        if ( photonView.isMine )
-        {
-            Debug.Log("Its me connected");
+        //character.GetComponent<CharacterControlInterface>().enabled = true;
+        character.GetComponent<PlayerMovementController>().enabled = true;
+        character.GetComponent<MouseController>().enabled = true;
+        character.GetComponent<HumanPlayerController>().enabled = true;
 
-            //character.GetComponent<CharacterControlInterface>().enabled = true;
-            character.GetComponent<PlayerMovementController>().enabled = true;
-            character.GetComponent<MouseController>().enabled = true;
-            character.GetComponent<HumanPlayerController>().enabled = true;
+        PlayerDataFetcher playerDataFetcher = GetComponent<PlayerDataFetcher>();
+        character.GetComponent<CharacterStats>().LoadFromData(playerDataFetcher.playerData);
 
-            PlayerDataFetcher playerDataFetcher = GetComponent<PlayerDataFetcher>();
-            character.GetComponent<CharacterStats>().LoadFromData(playerDataFetcher.playerData);
-
-            character.GetComponent<PhotonCharacterSpellcasting>().LoadSpells(playerDataFetcher.playerData);
-        }
-        else
-        {
-            Debug.Log("Its other player connected");
-        }
+        character.GetComponent<PhotonCharacterSpellcasting>().LoadSpells(playerDataFetcher.playerData);
     }
+
+//    void OnPhotonPlayerDisconnected(PhotonPlayer player)
+//    {
+//        GetComponent<GameController>().isGameFinished = true;
+//    }
 }

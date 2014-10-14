@@ -2108,8 +2108,8 @@ MonoBehaviour:
   name: 
   level: 0
   exp: 0
-  health: 100
-  maxhealth: 100
+  health: 100000
+  maxhealth: 100000
   isDeath: 0
 --- !u!114 &11400018
 MonoBehaviour:

@@ -10,7 +10,7 @@ public class FightResultSender : AbstractHttpFormSender {
     public string controllerName = "/fight";
     public string actionName = "/storeResults";
 
-    FightAwards fightAwards = null;
+    public FightAwards fightAwards = null;
 
     public bool isResultsSent = false;
 
@@ -35,8 +35,16 @@ public class FightResultSender : AbstractHttpFormSender {
     {
         form = new WWWForm();
 
+        int enemyHealth;
+        if (gameController.enemy != null)
+        {
+            enemyHealth = gameController.enemy.GetComponent<CharacterStats>().health;
+        } else {
+            enemyHealth = 0;
+        }
+
         form.AddField("playerHealthRemained", gameController.player.GetComponent<CharacterStats>().health);
-        form.AddField("enemyHealthRemained", gameController.enemy.GetComponent<CharacterStats>().health);
+        form.AddField("enemyHealthRemained", enemyHealth);
 
         receiveCallback += OnDataReceived;
 
@@ -51,7 +59,6 @@ public class FightResultSender : AbstractHttpFormSender {
         stream.Close();
 
         Debug.Log("Received results : " + fightAwards.hasWon);
-        //gameController.ResultSendSuccessful();
     }
 }
 

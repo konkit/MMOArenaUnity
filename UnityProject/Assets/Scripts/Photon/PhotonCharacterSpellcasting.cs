@@ -115,6 +115,9 @@ public class PhotonCharacterSpellcasting : MonoBehaviour {
     public void CastSpell() {
         if (currentCooldown <= 0.0f)
         {
+            MouseController mouse = GetComponent<MouseController>();
+            if (mouse) mouse.AlignRotation();
+
             Spell cntSpell = spellPossession[currentSpellNum].spell;
 
             photonView.RPC("InstantiateSpell", PhotonTargets.All, currentSpellNum);

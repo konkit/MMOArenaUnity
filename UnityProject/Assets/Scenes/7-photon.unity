@@ -35078,6 +35078,7 @@ GameObject:
   - 114: {fileID: 1443588906}
   - 114: {fileID: 1443588900}
   - 114: {fileID: 1443588901}
+  - 114: {fileID: 1443588903}
   m_Layer: 0
   m_Name: ScriptHolder
   m_TagString: Untagged
@@ -35146,6 +35147,7 @@ MonoBehaviour:
   enemy: {fileID: 0}
   isGameStarted: 0
   isGameFinished: 0
+  isPaused: 0
 --- !u!114 &1443588902
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -35163,6 +35165,17 @@ MonoBehaviour:
   actionName: /getFight
   roomName: 
   requestSent: 0
+--- !u!114 &1443588903
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1443588897}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9f2db6ae5cd11f14fa80eb25857bec95, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &1443588904
 MonoBehaviour:
   m_ObjectHideFlags: 0

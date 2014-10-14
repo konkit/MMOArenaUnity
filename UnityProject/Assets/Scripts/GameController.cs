@@ -9,6 +9,8 @@ public class GameController : MonoBehaviour {
     public bool isGameStarted = false;
     public bool isGameFinished = false;
 
+    public bool isPaused = false;
+
 	// Use this for initialization
 	void Start () {
 	
@@ -35,16 +37,37 @@ public class GameController : MonoBehaviour {
                     enemy = characterStats[0];
                 }
 
-                isGameStarted = true;
+                if (player.health > 0)
+                {
+                    isGameStarted = true;
+                }
             }
         }
         else if( isGameStarted == true )
         {
-            if (player.health <= 0 || enemy.health <= 0)
+            if (player.health <= 0 || enemy == null || enemy.health <= 0)
             {
                 isGameFinished = true;
+
+                PauseGame();
             }
         }
 
 	}
+
+    public void PauseGame()
+    {
+        player.GetComponent<MouseController>().Disable();
+        player.GetComponent<HumanPlayerController>().enabled = false;
+
+        isPaused = true;
+    }
+
+    public void UnpauseGame()
+    {
+        player.GetComponent<MouseController>().Enable();
+        player.GetComponent<HumanPlayerController>().enabled = true;
+
+        isPaused = false;
+    }
 }

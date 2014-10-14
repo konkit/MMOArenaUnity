@@ -6,7 +6,7 @@ public class MMOArenaPhotonNetworkView : MonoBehaviour {
     private Vector3 correctPlayerPos;
     private Quaternion correctPlayerRot;
 
-    private int healthAmount;
+    private int healthAmount = 10000;
 
     public PhotonView photonView;
     CharacterStats characterStats;
