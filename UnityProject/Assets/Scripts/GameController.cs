@@ -37,6 +37,18 @@ public class GameController : MonoBehaviour {
                     enemy = characterStats[0];
                 }
 
+                Debug.Log("Loading player spellcasting data");
+
+                PlayerDataFetcher playerDataFetcher = GetComponent<PlayerDataFetcher>();
+                player.LoadFromData(playerDataFetcher.playerData);
+                player.GetComponent<PhotonCharacterSpellcasting>().LoadSpells(playerDataFetcher.playerData);
+
+                Debug.Log("Loading enemy spellcasting data");
+
+                EnemyDataFetcher enemyDataFetcher = GetComponent<EnemyDataFetcher>();
+                enemy.LoadFromData(enemyDataFetcher.enemyData);
+                enemy.GetComponent<PhotonCharacterSpellcasting>().LoadSpells(enemyDataFetcher.enemyData);
+
                 if (player.health > 0)
                 {
                     isGameStarted = true;

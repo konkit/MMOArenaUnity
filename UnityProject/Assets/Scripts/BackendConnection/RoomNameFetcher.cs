@@ -10,8 +10,10 @@ public class RoomNameFetcher : AbstractHttpFetcher
     RequestFetcher requestFetcher = null;
 
     public string roomName = "";
+    public string enemyId = "";
 
     public bool requestSent = false;
+    public bool dataReceived = false;
 
     // Use this for initialization
     void Start()
@@ -43,6 +45,9 @@ public class RoomNameFetcher : AbstractHttpFetcher
         if (state == "PREPARED")
         {
             roomName = SimpleJSON.JSON.Parse(data)["state"]["fightId"];
+            enemyId = SimpleJSON.JSON.Parse(data)["state"]["enemyId"];
+
+            dataReceived = true;
         }
         else
         {

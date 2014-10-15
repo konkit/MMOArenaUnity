@@ -6,6 +6,7 @@ public class MMOArenaPhotonConnector : MonoBehaviour {
     public bool isOffline = false;
 
     RoomNameFetcher roomNameFetcher;
+    EnemyDataFetcher enemyDataFetcher;
 
     bool isConnected = false;
 
@@ -16,11 +17,12 @@ public class MMOArenaPhotonConnector : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
         roomNameFetcher = GetComponent<RoomNameFetcher>();
+        enemyDataFetcher = GetComponent<EnemyDataFetcher>();
 	}
 	
 	// Update is called once per frame
 	void Update () {
-        if ( !isConnected && roomNameFetcher != null && roomNameFetcher.roomName != "" )
+        if ( !isConnected && enemyDataFetcher != null && enemyDataFetcher.enemyId != 0 )
         {
             isConnected = true;
 
@@ -71,11 +73,6 @@ public class MMOArenaPhotonConnector : MonoBehaviour {
         character.GetComponent<PlayerMovementController>().enabled = true;
         character.GetComponent<MouseController>().enabled = true;
         character.GetComponent<HumanPlayerController>().enabled = true;
-
-        PlayerDataFetcher playerDataFetcher = GetComponent<PlayerDataFetcher>();
-        character.GetComponent<CharacterStats>().LoadFromData(playerDataFetcher.playerData);
-
-        character.GetComponent<PhotonCharacterSpellcasting>().LoadSpells(playerDataFetcher.playerData);
     }
 
 //    void OnPhotonPlayerDisconnected(PhotonPlayer player)
