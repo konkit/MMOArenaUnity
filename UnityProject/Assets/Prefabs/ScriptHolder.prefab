@@ -149,8 +149,8 @@ MonoBehaviour:
   isPaused: 0
   errorMsg: 
   loadingMsg: 
-  userBackendAddress: 107.155.108.250:8888/GrailsMMOArena-0.1
-  matchmakerAddress: 107.155.108.250:5000
+  userBackendAddress: http://107.155.108.250:8888/GrailsMMOArena-0.1
+  matchmakerAddress: http://107.155.108.250:5000
 --- !u!114 &11400014
 MonoBehaviour:
   m_ObjectHideFlags: 1
