@@ -9,14 +9,14 @@ GameObject:
   m_Component:
   - 4: {fileID: 400000}
   - 114: {fileID: 11400000}
-  - 114: {fileID: 11400006}
-  - 114: {fileID: 11400008}
-  - 114: {fileID: 11400004}
   - 114: {fileID: 11400010}
-  - 114: {fileID: 11400002}
   - 114: {fileID: 11400012}
   - 114: {fileID: 11400016}
   - 114: {fileID: 11400014}
+  - 114: {fileID: 11400008}
+  - 114: {fileID: 11400006}
+  - 114: {fileID: 11400002}
+  - 114: {fileID: 11400004}
   m_Layer: 0
   m_Name: ScriptHolder
   m_TagString: Untagged
@@ -35,6 +35,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
+  m_RootOrder: 0
 --- !u!114 &11400000
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -58,16 +59,34 @@ MonoBehaviour:
   m_GameObject: {fileID: 100000}
   m_Enabled: 1
   m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ae376a4474030854383c3b712f5af454, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  receivedData: 
+  controllerName: /fight
+  actionName: /getPlayerData
+  enemyId: 0
+  gameController: {fileID: 0}
+  roomNameFetcher: {fileID: 11400006}
+  isSent: 0
+  dataReceived: 0
+--- !u!114 &11400004
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 100000}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 6d9c32c2129c6aa47b60e32021dbddcf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   receivedData: 
-  serverAddress: http://107.155.108.250:8888/GrailsMMOArena-0.1
   controllerName: /fight
   actionName: /storeResults
   isResultsSent: 0
   gameController: {fileID: 0}
---- !u!114 &11400004
+--- !u!114 &11400006
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -79,28 +98,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   receivedData: 
-  serverAddress: http://107.155.108.250:5000
   actionName: /getFight
   roomName: 
   enemyId: 
   requestSent: 0
   dataReceived: 0
---- !u!114 &11400006
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 100000}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 112ba39f252324e4eb3d56d1332cac54, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  receivedData: 
-  serverAddress: http://107.155.108.250:8888/GrailsMMOArena-0.1
-  controllerName: /fight
-  actionName: /getPlayerData
-  playerId: 0
 --- !u!114 &11400008
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -113,7 +115,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   receivedData: 
-  serverAddress: http://107.155.108.250:5000
   actionName: /requestFight
   requestId: 
 --- !u!114 &11400010
@@ -142,9 +143,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   player: {fileID: 0}
   enemy: {fileID: 0}
+  backendDataLoaded: 0
   isGameStarted: 0
   isGameFinished: 0
   isPaused: 0
+  errorMsg: 
+  loadingMsg: 
+  userBackendAddress: 107.155.108.250:8888/GrailsMMOArena-0.1
+  matchmakerAddress: 107.155.108.250:5000
 --- !u!114 &11400014
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -153,17 +159,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 100000}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ae376a4474030854383c3b712f5af454, type: 3}
+  m_Script: {fileID: 11500000, guid: 112ba39f252324e4eb3d56d1332cac54, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   receivedData: 
-  serverAddress: http://107.155.108.250:8888/GrailsMMOArena-0.1
   controllerName: /fight
   actionName: /getPlayerData
-  enemyId: 0
-  roomNameFetcher: {fileID: 0}
-  isSent: 0
-  dataReceived: 0
+  playerId: 0
 --- !u!114 &11400016
 MonoBehaviour:
   m_ObjectHideFlags: 1
