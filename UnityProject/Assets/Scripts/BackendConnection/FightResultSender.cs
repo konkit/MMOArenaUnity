@@ -6,7 +6,6 @@ using System.Text;
 
 public class FightResultSender : AbstractHttpFormSender {
 
-    public string serverAddress = "http://localhost:8080/GrailsMMOArena";
     public string controllerName = "/fight";
     public string actionName = "/storeResults";
 
@@ -26,7 +25,7 @@ public class FightResultSender : AbstractHttpFormSender {
         if (gameController.isGameFinished && isResultsSent == false)
         {
             isResultsSent = true;
-            absoluteAddress = serverAddress + controllerName + actionName;
+            absoluteAddress = gameController.userBackendAddress + controllerName + actionName;
             Send();
         }
 	}

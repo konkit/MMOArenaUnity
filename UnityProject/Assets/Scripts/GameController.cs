@@ -6,12 +6,17 @@ public class GameController : MonoBehaviour {
     public CharacterStats player;
     public CharacterStats enemy;
 
+    public bool backendDataLoaded = false;
     public bool isGameStarted = false;
     public bool isGameFinished = false;
 
     public bool isPaused = false;
 
     public string errorMsg = "";
+    public string loadingMsg = "";
+
+    public string userBackendAddress = "http://localhost:8080/GrailsMMOArena";
+    public string matchmakerAddress = "http://localhost:5000";
 
 	// Use this for initialization
 	void Start () {
@@ -26,6 +31,11 @@ public class GameController : MonoBehaviour {
 
             if (characterStats.Length != 2)
             {
+                if (backendDataLoaded == true)
+                {
+                    loadingMsg = "Waiting for other player to connect ...";
+                }
+
                 return;
             }
             else

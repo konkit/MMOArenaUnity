@@ -8,19 +8,23 @@ using System.Text;
 
 public class PlayerDataFetcher : AbstractHttpFetcher
 {
-    public string serverAddress = "http://localhost:8080/GrailsMMOArena";
     public string controllerName = "/fight";
     public string actionName = "/getPlayerData";
 
     public Character playerData = null;
     public int playerId = 0;
 
+    GameController gameController = null;
+
     // Use this for initialization
     void Start()
     {
+        gameController = GetComponent<GameController>();
+        gameController.loadingMsg = "Fetching player data";
+
         receiveCallback += UpdatePlayerData;
 
-        this.absoluteAddress = serverAddress + controllerName + actionName;
+        this.absoluteAddress = gameController.userBackendAddress + controllerName + actionName;
         this.Fetch();
     }
 

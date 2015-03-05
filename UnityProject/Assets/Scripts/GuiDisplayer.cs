@@ -39,10 +39,18 @@ public class GuiDisplayer : MonoBehaviour {
         }
         else if (gameController.isGameStarted == false)
         {
-            GUILayout.BeginArea(new Rect((Screen.width / 2) - 50, (Screen.height / 2), 100, 100));
+            GUILayout.BeginArea(new Rect((Screen.width / 2) - 250, (Screen.height / 2), 500, 100));
             GUILayout.BeginVertical();
 
-            GUILayout.Box("Connecting...");
+            if (gameController.loadingMsg.Length > 0)
+            {
+                GUILayout.Box(gameController.loadingMsg);
+            }
+            else
+            {
+                GUILayout.Box("Connecting...");
+            }
+            
 
             GUILayout.EndVertical();
             GUILayout.EndArea();

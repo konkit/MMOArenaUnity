@@ -8,13 +8,13 @@ using System.Text;
 
 public class EnemyDataFetcher : AbstractHttpFetcher
 {
-    public string serverAddress = "http://localhost:8080/GrailsMMOArena";
     public string controllerName = "/fight";
     public string actionName = "/getPlayerData";
 
     public Character enemyData = null;
     public int enemyId = 0;
 
+    public GameController gameController;
     public RoomNameFetcher roomNameFetcher;
 
     public bool isSent = false;
@@ -25,6 +25,7 @@ public class EnemyDataFetcher : AbstractHttpFetcher
     void Start()
     {
         roomNameFetcher = GetComponent<RoomNameFetcher>();
+        gameController = GetComponent<GameController>();
     }
 
     // Update is called once per frame
@@ -33,10 +34,11 @@ public class EnemyDataFetcher : AbstractHttpFetcher
         if (isSent == false && roomNameFetcher.dataReceived == true)
         {
             isSent = true;
+            gameController.loadingMsg = "Fetching enemy data";
 
             receiveCallback += UpdateEnemyData;
 
-            this.absoluteAddress = serverAddress + controllerName + actionName + "/" + enemyId ;
+            this.absoluteAddress = gameController.userBackendAddress + controllerName + actionName + "/" + enemyId;
             this.Fetch();
         }
     }
@@ -54,5 +56,7 @@ public class EnemyDataFetcher : AbstractHttpFetcher
         stream.Close();
 
         dataReceived = true;
+
+        gameController.backendDataLoaded = true;
     }
 }

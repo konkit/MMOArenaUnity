@@ -3,11 +3,10 @@ using System.Collections;
 
 public class RoomNameFetcher : AbstractHttpFetcher
 {
-
-    public string serverAddress = "http://localhost:5000";
     public string actionName = "/getFight";
 
     RequestFetcher requestFetcher = null;
+    GameController gameController = null;
 
     public string roomName = "";
     public string enemyId = "";
@@ -19,6 +18,7 @@ public class RoomNameFetcher : AbstractHttpFetcher
     void Start()
     {
         requestFetcher = GetComponent<RequestFetcher>();
+        gameController = GetComponent<GameController>();
     }
 
     // Update is called once per frame
@@ -27,9 +27,10 @@ public class RoomNameFetcher : AbstractHttpFetcher
         if ( requestFetcher != null && !requestSent && requestFetcher.requestId !=  "")
         {
             requestSent = true;
+            gameController.loadingMsg = "Waiting for the fight ...";
 
             receiveCallback += UpdateRequestId;
-            this.absoluteAddress = serverAddress + actionName + "/" + requestFetcher.requestId;
+            this.absoluteAddress = gameController.matchmakerAddress + actionName + "/" + requestFetcher.requestId;
             this.Fetch();
         }
     }
