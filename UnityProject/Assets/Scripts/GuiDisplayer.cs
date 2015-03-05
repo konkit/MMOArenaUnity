@@ -6,6 +6,8 @@ public class GuiDisplayer : MonoBehaviour {
     GameController gameController;
     FightResultSender fightResultSender;
 
+    
+
 	// Use this for initialization
 	void Start () {
         fightResultSender = GetComponent<FightResultSender>();
@@ -19,7 +21,23 @@ public class GuiDisplayer : MonoBehaviour {
 
     void OnGUI()
     {
-        if (gameController.isGameStarted == false)
+        if (gameController.errorMsg.Length > 0)
+        {
+            GUILayout.BeginArea(new Rect((Screen.width / 2) - 250, (Screen.height / 2), 500, 100));
+            GUILayout.BeginVertical();
+
+            GUILayout.Box("Error occured : " + gameController.errorMsg);
+
+            if (GUILayout.Button("Go back"))
+            {
+                Debug.Log("Go back external call");
+                Application.ExternalCall("redirectAfterFight");
+            }
+
+            GUILayout.EndVertical();
+            GUILayout.EndArea();
+        }
+        else if (gameController.isGameStarted == false)
         {
             GUILayout.BeginArea(new Rect((Screen.width / 2) - 50, (Screen.height / 2), 100, 100));
             GUILayout.BeginVertical();

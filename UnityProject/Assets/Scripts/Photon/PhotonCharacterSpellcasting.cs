@@ -45,8 +45,6 @@ public class PhotonCharacterSpellcasting : MonoBehaviour {
         if (controlInterface.isPunch)
         {
             Debug.Log("Punch button activated");
-
-            //castCurrentSpell();
             CastSpell();
         }
         else if (controlInterface.previousSpell)

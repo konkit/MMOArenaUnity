@@ -26,6 +26,7 @@ public class FightResult {
 	public int enemyHealthRemained { get; set; }
 }
 
+
 [XmlRoot("fightAwards")]
 public class FightAwards
 {
@@ -39,7 +40,7 @@ public class FightAwards
     public int expEarned { get; set; }
 }
 
-[XmlRoot("character")]
+[XmlRoot("player")]
 public class Character {
     [XmlAttribute("id")]
     public int Id { get; set; }
@@ -68,6 +69,7 @@ public class Character {
 	public List<SpellPossession> Spells { get; set; }
 
 }
+
 
 public class Item {
 	[XmlElement("name")]

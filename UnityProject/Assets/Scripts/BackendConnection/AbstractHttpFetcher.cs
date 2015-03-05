@@ -34,6 +34,7 @@ public class AbstractHttpFetcher : MonoBehaviour {
 
         if (www.error != null)
         {
+            GetComponent<GameController>().errorMsg = www.error;
             throw new UnityException("Http request error : " + www.error);
         }
 

@@ -11,6 +11,8 @@ public class GameController : MonoBehaviour {
 
     public bool isPaused = false;
 
+    public string errorMsg = "";
+
 	// Use this for initialization
 	void Start () {
 	
