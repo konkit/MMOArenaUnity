@@ -1,7 +1,12 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Xml.Serialization;
+using System.IO;
+using System.Text;
 
 public class GameController : MonoBehaviour {
+
+    Character playerData = null, enemyData = null;
 
     public CharacterStats player;
     public CharacterStats enemy;
@@ -20,7 +25,7 @@ public class GameController : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-	
+        Application.ExternalCall("requestFight");
 	}
 	
 	// Update is called once per frame
@@ -51,15 +56,14 @@ public class GameController : MonoBehaviour {
 
                 Debug.Log("Loading player spellcasting data");
 
-                PlayerDataFetcher playerDataFetcher = GetComponent<PlayerDataFetcher>();
-                player.LoadFromData(playerDataFetcher.playerData);
-                player.GetComponent<PhotonCharacterSpellcasting>().LoadSpells(playerDataFetcher.playerData);
+                player.LoadFromData(playerData);
+                player.GetComponent<PhotonCharacterSpellcasting>().LoadSpells(playerData);
 
                 Debug.Log("Loading enemy spellcasting data");
 
-                EnemyDataFetcher enemyDataFetcher = GetComponent<EnemyDataFetcher>();
-                enemy.LoadFromData(enemyDataFetcher.enemyData);
-                enemy.GetComponent<PhotonCharacterSpellcasting>().LoadSpells(enemyDataFetcher.enemyData);
+                enemy.LoadFromData(enemyData);
+                enemy.GetComponent<PhotonCharacterSpellcasting>().LoadSpells(enemyData);
+
 
                 if (player.health > 0)
                 {
@@ -93,5 +97,33 @@ public class GameController : MonoBehaviour {
         player.GetComponent<HumanPlayerController>().enabled = true;
 
         isPaused = false;
+    }
+
+    void SetPlayer(string data)
+    {
+        var serializer = new XmlSerializer(typeof(Character));
+        var stream = new MemoryStream(Encoding.ASCII.GetBytes(data));
+        playerData = serializer.Deserialize(stream) as Character;
+
+        Debug.Log("!!! PlayerData");
+        Debug.Log("playerData lvl" + playerData.Level);
+        Debug.Log("playerData health : " + playerData.MaxHealth);
+
+        stream.Close();
+    }
+
+    void SetEnemy(string data)
+    {
+        var serializer = new XmlSerializer(typeof(Character));
+        var stream = new MemoryStream(Encoding.ASCII.GetBytes(data));
+        enemyData = serializer.Deserialize(stream) as Character;
+
+        stream.Close();
+    }
+
+    void StartGame(string roomname)
+    {
+        GetComponent<MMOArenaPhotonConnector>().Connect(roomname);
+        backendDataLoaded = true;
     }
 }
