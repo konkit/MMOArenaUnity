@@ -25254,7 +25254,12 @@ Prefab:
       propertyPath: m_RootOrder
       value: 7
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 11400014, guid: d400bc38916fb7f42a5f4e949b16154f, type: 2}
+    - {fileID: 11400008, guid: d400bc38916fb7f42a5f4e949b16154f, type: 2}
+    - {fileID: 11400006, guid: d400bc38916fb7f42a5f4e949b16154f, type: 2}
+    - {fileID: 11400002, guid: d400bc38916fb7f42a5f4e949b16154f, type: 2}
+    - {fileID: 11400004, guid: d400bc38916fb7f42a5f4e949b16154f, type: 2}
   m_ParentPrefab: {fileID: 100100000, guid: d400bc38916fb7f42a5f4e949b16154f, type: 2}
   m_RootGameObject: {fileID: 1443588897}
   m_IsPrefabParent: 0
@@ -35087,10 +35092,6 @@ GameObject:
   - 114: {fileID: 1443588906}
   - 114: {fileID: 1443588901}
   - 114: {fileID: 1443588903}
-  - 114: {fileID: 1443588907}
-  - 114: {fileID: 1443588905}
-  - 114: {fileID: 1443588904}
-  - 114: {fileID: 1443588900}
   - 114: {fileID: 1443588902}
   m_Layer: 0
   m_Name: ScriptHolder
@@ -35127,26 +35128,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 7
---- !u!114 &1443588900
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 11400002, guid: d400bc38916fb7f42a5f4e949b16154f,
-    type: 2}
-  m_PrefabInternal: {fileID: 1206374931}
-  m_GameObject: {fileID: 1443588897}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ae376a4474030854383c3b712f5af454, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  receivedData: 
-  controllerName: /fight
-  actionName: /getPlayerData
-  enemyId: 0
-  gameController: {fileID: 0}
-  roomNameFetcher: {fileID: 1443588904}
-  isSent: 0
-  dataReceived: 0
 --- !u!114 &1443588901
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -35167,25 +35148,21 @@ MonoBehaviour:
   isPaused: 0
   errorMsg: 
   loadingMsg: 
-  userBackendAddress: http://107.155.108.250:8888/GrailsMMOArena-0.1
-  matchmakerAddress: http://107.155.108.250:5000
 --- !u!114 &1443588902
 MonoBehaviour:
   m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 11400004, guid: d400bc38916fb7f42a5f4e949b16154f,
-    type: 2}
-  m_PrefabInternal: {fileID: 1206374931}
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1443588897}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6d9c32c2129c6aa47b60e32021dbddcf, type: 3}
+  m_Script: {fileID: 11500000, guid: 27b2da8b545ab6d47bfd68ba32b4f197, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  receivedData: 
-  controllerName: /fight
-  actionName: /storeResults
-  isResultsSent: 0
-  gameController: {fileID: 0}
+  isActive: 1
+  photonConnector: {fileID: 1443588906}
+  gameController: {fileID: 1443588901}
+  playerPrefab: {fileID: 100020, guid: 7d3c33b9912061d42924430dbdfabdae, type: 2}
 --- !u!114 &1443588903
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -35198,39 +35175,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9f2db6ae5cd11f14fa80eb25857bec95, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &1443588904
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 11400006, guid: d400bc38916fb7f42a5f4e949b16154f,
-    type: 2}
-  m_PrefabInternal: {fileID: 1206374931}
-  m_GameObject: {fileID: 1443588897}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 74cce0b884cc4244696caf507dbcceb7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  receivedData: 
-  actionName: /getFight
-  roomName: 
-  enemyId: 
-  requestSent: 0
-  dataReceived: 0
---- !u!114 &1443588905
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 11400008, guid: d400bc38916fb7f42a5f4e949b16154f,
-    type: 2}
-  m_PrefabInternal: {fileID: 1206374931}
-  m_GameObject: {fileID: 1443588897}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6375d10530badd34ea06593bbc4b5d77, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  receivedData: 
-  actionName: /requestFight
-  requestId: 
 --- !u!114 &1443588906
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -35245,22 +35189,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isOffline: 0
   playerId: -1
---- !u!114 &1443588907
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 11400014, guid: d400bc38916fb7f42a5f4e949b16154f,
-    type: 2}
-  m_PrefabInternal: {fileID: 1206374931}
-  m_GameObject: {fileID: 1443588897}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 112ba39f252324e4eb3d56d1332cac54, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  receivedData: 
-  controllerName: /fight
-  actionName: /getPlayerData
-  playerId: 0
 --- !u!1 &1453062631
 GameObject:
   m_ObjectHideFlags: 0

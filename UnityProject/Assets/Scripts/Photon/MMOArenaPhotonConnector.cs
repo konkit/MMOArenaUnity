@@ -5,8 +5,6 @@ public class MMOArenaPhotonConnector : MonoBehaviour {
 
     public bool isOffline = false;
 
-    RoomNameFetcher roomNameFetcher;
-    EnemyDataFetcher enemyDataFetcher;
 
     bool isConnected = false;
 
@@ -16,27 +14,11 @@ public class MMOArenaPhotonConnector : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-        roomNameFetcher = GetComponent<RoomNameFetcher>();
-        enemyDataFetcher = GetComponent<EnemyDataFetcher>();
 	}
 	
 	// Update is called once per frame
 	void Update () {
-        if ( !isConnected && enemyDataFetcher != null && enemyDataFetcher.enemyId != 0 )
-        {
-            isConnected = true;
 
-            if (isOffline)
-            {
-                Debug.Log("Setting offline mode");
-                PhotonNetwork.offlineMode = true;
-                PhotonNetwork.CreateRoom("offlinemoderoom");
-            }
-            else
-            {
-                Connect(roomNameFetcher.roomName);
-            }            
-        }
 	}
 
     public void Connect(string roomName)

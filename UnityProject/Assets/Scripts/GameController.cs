@@ -6,7 +6,7 @@ using System.Text;
 
 public class GameController : MonoBehaviour {
 
-    Character playerData = null, enemyData = null;
+    public Character playerData = null, enemyData = null;
 
     public CharacterStats player;
     public CharacterStats enemy;
@@ -19,9 +19,6 @@ public class GameController : MonoBehaviour {
 
     public string errorMsg = "";
     public string loadingMsg = "";
-
-    public string userBackendAddress = "http://localhost:8080/GrailsMMOArena";
-    public string matchmakerAddress = "http://localhost:5000";
 
 	// Use this for initialization
 	void Start () {
@@ -99,29 +96,23 @@ public class GameController : MonoBehaviour {
         isPaused = false;
     }
 
-    void SetPlayer(string data)
+    public void SetPlayer(string data)
     {
         var serializer = new XmlSerializer(typeof(Character));
         var stream = new MemoryStream(Encoding.ASCII.GetBytes(data));
         playerData = serializer.Deserialize(stream) as Character;
-
-        Debug.Log("!!! PlayerData");
-        Debug.Log("playerData lvl" + playerData.Level);
-        Debug.Log("playerData health : " + playerData.MaxHealth);
-
         stream.Close();
     }
 
-    void SetEnemy(string data)
+    public void SetEnemy(string data)
     {
         var serializer = new XmlSerializer(typeof(Character));
         var stream = new MemoryStream(Encoding.ASCII.GetBytes(data));
         enemyData = serializer.Deserialize(stream) as Character;
-
         stream.Close();
     }
 
-    void StartGame(string roomname)
+    public void StartGame(string roomname)
     {
         GetComponent<MMOArenaPhotonConnector>().Connect(roomname);
         backendDataLoaded = true;

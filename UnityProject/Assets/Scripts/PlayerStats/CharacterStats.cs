@@ -3,11 +3,11 @@ using System.Collections;
 
 public class CharacterStats : MonoBehaviour {
 
-	public string name;
-	public int level;
-	public int exp;
+	public string name = "John Doe";
+	public int level = 1;
+	public int exp = 0;
 
-	public int health, maxhealth;
+	public int health = 100, maxhealth = 100;
 
 	public delegate void DeathDelegate();
 	public DeathDelegate deathDelegate;

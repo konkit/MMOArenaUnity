@@ -3,14 +3,10 @@ using System.Collections;
 
 public class GuiDisplayer : MonoBehaviour {
 
-    GameController gameController;
-    FightResultSender fightResultSender;
-
-    
+    GameController gameController;    
 
 	// Use this for initialization
 	void Start () {
-        fightResultSender = GetComponent<FightResultSender>();
         gameController = GetComponent<GameController>();
 	}
 	
@@ -56,6 +52,7 @@ public class GuiDisplayer : MonoBehaviour {
             GUILayout.EndArea();
         }
 
+        /*
         if( fightResultSender.fightAwards != null ) {
             GUILayout.BeginArea(new Rect((Screen.width / 2) - 50, (Screen.height / 2), 100, 100));
             GUILayout.BeginVertical();
@@ -80,6 +77,7 @@ public class GuiDisplayer : MonoBehaviour {
             GUILayout.EndVertical();
             GUILayout.EndArea();
         }
+        */
         
     }
 }
